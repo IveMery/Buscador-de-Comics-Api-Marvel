@@ -7,7 +7,7 @@
         "utilis/_variables.scss",
         "components/_botones.scss",
         "utilis/_extend.scss",
-        "utilis/_mixins.scss",
+        "abstract/_mixins.scss",
         "layout/_main.scss",
         "layout/_header.scss",
         "layout/_footer.scss"
