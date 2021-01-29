@@ -1,0 +1,5 @@
+footer {
+    @include componentes-secundarios;
+    @extend %centrar-flex;
+    height: 100px;
+}

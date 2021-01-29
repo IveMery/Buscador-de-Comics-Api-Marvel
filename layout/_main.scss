@@ -1,0 +1,13 @@
+.resultados {
+    width: 800px;
+    height: 800px;
+}
+
+.contenedor-buscador {
+    display: flex;
+    justify-content: space-around;
+}
+
+.paginas {
+    @extend %centrar-flex;
+}

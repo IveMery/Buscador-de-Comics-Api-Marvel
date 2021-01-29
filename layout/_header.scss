@@ -1,0 +1,5 @@
+header {
+    @include componentes-secundarios;
+    height: 60px;
+    @extend %centrar-flex;
+}

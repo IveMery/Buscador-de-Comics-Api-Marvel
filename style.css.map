@@ -1,0 +1,17 @@
+{
+    "version": 3,
+    "mappings": "ACAA,AAAA,CAAC,CAAC;EACE,MAAM,EAAE,CAAC;EACT,OAAO,EAAE,CAAC;EACV,UAAU,EAAE,UAAU;CACzB;;AEED,AAAA,gBAAgB,CAAC;EALb,MAAM,EAAE,IAAI;EACZ,gBAAgB,EDEG,KAAK;ECDxB,KAAK,EDAe,KAAK;ECKzB,KAAK,EAAE,IAAI;CACd;;AAED,AAAA,iBAAiB,CAAC;EAVd,MAAM,EAAE,IAAI;EACZ,gBAAgB,EDEG,KAAK;ECDxB,KAAK,EDAe,KAAK;ECUzB,KAAK,EAAE,IAAI;CACd;;AGJD,AFVA,QEUQ,ECVR,MAAM,ECAN,MAAM,CJAQ;EACV,OAAO,EAAE,IAAI;EACb,WAAW,EAAE,MAAM;EACnB,eAAe,EAAE,MAAM;CAC1B;;AEJD,AAAA,WAAW,CAAC;EACR,KAAK,EAAE,KAAK;EACZ,MAAM,EAAE,KAAK;CAChB;;AAED,AAAA,oBAAoB,CAAC;EACjB,OAAO,EAAE,IAAI;EACb,eAAe,EAAE,YAAY;CAChC;;ACRD,AAAA,MAAM,CAAC;EFCH,gBAAgB,EHAF,KAAK;EGCnB,KAAK,EAAE,IAAI;EACX,KAAK,EHAe,KAAK;EKDzB,MAAM,EAAE,IAAI;CAEf;;ACJD,AAAA,MAAM,CAAC;EHCH,gBAAgB,EHAF,KAAK;EGCnB,KAAK,EAAE,IAAI;EACX,KAAK,EHAe,KAAK;EMAzB,MAAM,EAAE,KAAK;CAChB",
+    "sources": [
+        "style.scss",
+        "base/_reset.scss",
+        "utilis/_variables.scss",
+        "components/_botones.scss",
+        "utilis/_extend.scss",
+        "utilis/_mixins.scss",
+        "layout/_main.scss",
+        "layout/_header.scss",
+        "layout/_footer.scss"
+    ],
+    "names": [],
+    "file": "style.css"
+}

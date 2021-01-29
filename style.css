@@ -1,0 +1,60 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.boton-principal {
+  height: 40px;
+  background-color: black;
+  color: white;
+  width: 60px;
+}
+
+.boton-secundario {
+  height: 40px;
+  background-color: black;
+  color: white;
+  width: 40px;
+}
+
+.paginas, header, footer {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.resultados {
+  width: 800px;
+  height: 800px;
+}
+
+.contenedor-buscador {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+header {
+  background-color: black;
+  width: 100%;
+  color: white;
+  height: 60px;
+}
+
+footer {
+  background-color: black;
+  width: 100%;
+  color: white;
+  height: 100px;
+}
+/*# sourceMappingURL=style.css.map */
