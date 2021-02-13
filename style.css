@@ -170,6 +170,29 @@ main .resultados-seccion {
   font-size: 14px;
 }
 
+.info-comic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 1300px;
+  height: 600px;
+}
+
+.info-comic .info-comic-img {
+  width: 350px;
+  height: 600px;
+}
+
+.info-comic .info-comic-img-portada {
+  width: 350px;
+  height: 100%;
+}
+
+.info-comic .info-comic-datos {
+  width: 600px;
+  margin-left: 60px;
+}
+
 .contenedor-logo {
   background-color: black;
   width: 100%;

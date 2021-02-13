@@ -96,3 +96,21 @@
     .paginas {
         @extend %centrar-flex;
     }
+    
+    .info-comic {
+        display: flex;
+        width: 1300px;
+        height: 600px;
+        .info-comic-img {
+            width: 350px;
+            height: 600px;
+        }
+        .info-comic-img-portada {
+            width: 350px;
+            height: 100%;
+        }
+        .info-comic-datos {
+            width: 600px;
+            margin-left: 60px;
+        }
+    }
