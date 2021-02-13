@@ -1,5 +1,24 @@
-header {
-    @include componentes-secundarios;
-    height: 60px;
-    @extend %centrar-flex;
-}
+    .contenedor-logo {
+        @include componentes-secundarios;
+        @extend %centrar-flex;
+    }
+    
+    .logo-ada {
+        background-color: $color-fondo-logo;
+        color: $color-texto-secundario;
+        font-family: $font-family-logo;
+        font-weight: bold;
+        font-size: $font-size-logo;
+        line-height: 50px;
+        margin: 0;
+        padding: 0 10px;
+    }
+    
+    .img-contenedor {
+        width: 100%;
+        .img-portada {
+            width: 100%;
+            min-height: 400px;
+            // filter: grayscale(10%);
+        }
+    }

@@ -4,63 +4,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" href="favicon (3).ico" type="image/x-icon">
     <title>Ada Comics</title>
 </head>
 
 <body>
 
-    <header> Ada Comics</header>
-    <div class="img-portada"></div>
+    <header class="contenedor-logo">
+        <h1 class="logo-ada">ADA COMICS</h1>
+    </header>
+    <div class="img-contenedor"><img class="img-portada" src="imagenes/banner-marvel.jpg" alt=""></div>
+
     <main>
         <section class="contenedor-buscador">
             <div class="contenedor-busqueda">
-                <h2>Búsqueda</h2>
+                <h2 class="titulos-de-seccion">Búsqueda</h2>
 
-                <form action="">
-                    <input type="text" placeholder="Ingresa tu busqueda">
-                    <!-- <
-                        i class="fas fa-search" aria-hidden="true"></i> -->
+
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input class="input-barra-de-busqueda" id="filtro" type="text" placeholder="Ingresa tu busqueda">
+
             </div>
 
             <div class="contenedor-opciones">
-                <label for="tipo">TIPO</label>
-                <select name="tipo" id="tipo">
+                <form action="formulario">
+                    <label for="tipo">TIPO</label>
+                    <select name="tipo" id="tipo">
                     <option value="comics">COMICS</option>
-                    <option value="comics">PERSONAJES</option>
-                </select>
-                <label for="tipo">ORDEN</label>
-                <select name="orden" id="orden">
+                    <option value="personajes">PERSONAJES</option>
+                   </select>
+                    <label for="orden">ORDEN</label>
+                    <select name="orden" id="orden">
                     <option value="A-Z">A-Z</option>
                     <option value="Z-A">Z-A</option>
                     <option value="Mas Nuevos">Mas Nuevos</option>
                     <option value="Mas Viejos">Mas Viejos</option>
-                </select>
-                <button class="boton-principal">Buscar</button>
+                  </select>
+                    <button type="submit" class="boton-principal">BUSCAR</button>
             </div>
         </section>
+        </form>
 
-
-
-        <h2>Resultados</h2>
-        <p>****** RESULTADOS</p>
+        <section class="resultados-seccion">
+            <h2 class="titulos-de-seccion">Resultados</h2>
+            <p class="contador-resultados"><span class="cuenta-resultados">****** </span>RESULTADOS</p>
+        </section>
         <div class="resultados">
+            <!-- resultados.innerHTML += `<article class="comic">
+                <div class="comic-img-container">
+                   <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
+                </div>
+                <h3 class="comic-titulo"> ${comic[nombre]}</h3>
+                
+                </article>
 
-
+            </div> -->
         </div>
 
 
         <section class="paginas">
             <button class="boton-secundario">
-                << </button>
+                <i class="fas fa-angle-double-left" aria-hidden="true"></i> </button>
             <button class="boton-secundario">
-                        < </button>
-            <button class="boton-secundario">></button>
-            <button class="boton-secundario">>></button>
+                <i class="fas fa-angle-left" aria-hidden="true"></i></button>
+            <button class="boton-secundario"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
+            <button class="boton-secundario"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button>
         </section>
     </main>
     <footer> Hecho con amor</footer>
-
+    <script src="main.js"></script>
 </body>
 
 </html>

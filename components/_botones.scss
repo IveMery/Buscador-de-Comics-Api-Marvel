@@ -1,15 +1,13 @@
-@mixin botones($color-boton-principal, $color-texto-secundario) {
-    height: 40px;
-    background-color: $color-boton-principal;
-    color: $color-texto-secundario;
-}
-
 .boton-principal {
-    @include botones($color-boton-principal, $color-texto-secundario);
-    width: 60px;
+    @extend %botones;
+    width: 100px;
+    font-size: 16px;
 }
 
 .boton-secundario {
-    @include botones($color-boton-principal, $color-texto-secundario);
+    @extend %botones;
     width: 40px;
+    margin-top: 40px;
+    font-size: 25px;
+    font-weight: bold;
 }
