@@ -183,7 +183,7 @@ main .resultados-seccion {
   height: 600px;
 }
 
-.info-comic .info-comic-img-portada {
+.info-comic .info-comic-img .info-comic-img-portada {
   width: 350px;
   height: 100%;
 }
@@ -191,6 +191,52 @@ main .resultados-seccion {
 .info-comic .info-comic-datos {
   width: 600px;
   margin-left: 60px;
+}
+
+.hidden {
+  display: none;
+}
+
+.tarjeta-info-extra-contenedor {
+  width: 200px;
+  height: 400px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  background-color: black;
+  margin: 30px;
+  margin-top: 40px;
+}
+
+.tarjeta-info-extra-contenedor .tarjeta-info-extra-img {
+  width: 200px;
+  height: 280px;
+}
+
+.tarjeta-info-extra-contenedor .tarjeta-info-extra-img .tarjeta-info-extra-img-portada {
+  width: 100%;
+  height: 100%;
+}
+
+.tarjeta-info-extra {
+  border: 0;
+  border-top: 5px solid red;
+}
+
+.tarjeta-info-extra .tarjeta-info-extra-titulo {
+  color: white;
+  text-align: center;
+}
+
+.dataExtra-comic-y-personajes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  margin: 180px;
 }
 
 .contenedor-logo {

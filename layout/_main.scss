@@ -104,13 +104,49 @@
         .info-comic-img {
             width: 350px;
             height: 600px;
-        }
-        .info-comic-img-portada {
-            width: 350px;
-            height: 100%;
+            .info-comic-img-portada {
+                width: 350px;
+                height: 100%;
+            }
         }
         .info-comic-datos {
             width: 600px;
             margin-left: 60px;
         }
+    }
+    
+    .hidden {
+        display: none;
+    }
+    
+    .tarjeta-info-extra-contenedor {
+        width: 200px;
+        height: 400px;
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        margin: 30px;
+        margin-top: 40px;
+        .tarjeta-info-extra-img {
+            width: 200px;
+            height: 280px;
+            .tarjeta-info-extra-img-portada {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    
+    .tarjeta-info-extra {
+        border: 0;
+        border-top: 5px solid red;
+        .tarjeta-info-extra-titulo {
+            color: white;
+            text-align: center;
+        }
+    }
+    
+    .dataExtra-comic-y-personajes {
+        display: flex;
+        margin: 180px;
     }
