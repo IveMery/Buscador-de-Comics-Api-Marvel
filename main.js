@@ -20,41 +20,43 @@ const limpiarResultados = () => {
     resultados.innerHTML = ""
 }
 
+// buscar comic y personajes
 const buscarComics = (url, nombre) => {
-    fetch(`${urlBase + url}?apikey=${apiKey}${ordenarComicsDeLaAZ}&offset=${paginaActual * comicsPorPagina}`)
-        .then((res) => {
-            return res.json()
-        })
-        .then((comics) => {
-            console.log(comics)
+        fetch(`${urlBase + url}?apikey=${apiKey}${ordenarComicsDeLaAZ}&offset=${paginaActual * comicsPorPagina}`)
+            .then((res) => {
+                return res.json()
+            })
+            .then((comics) => {
+                console.log(comics)
 
-            limpiarResultados()
-            comics.data.results.map(comic => {
-                resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
+                limpiarResultados()
+                comics.data.results.map(comic => {
+                    resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
 <div class="comic-img-container">
    <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
 </div>
+
 <h3 class="comic-titulo"> ${comic[nombre]}</h3>
 </article>
 `
-            })
+                })
 
-            const listaDecomics = document.querySelectorAll('.comic');
-            console.log(listaDecomics)
-            listaDecomics.forEach(comic => {
-                comic.onclick = () => {
+                const listaDecomics = document.querySelectorAll('.comic');
+                console.log(listaDecomics)
+                listaDecomics.forEach(comic => {
+                    comic.onclick = () => {
 
-                    console.log("hice click a un comic con el id ", comic.dataset.id)
-                    fetch(`https://gateway.marvel.com/v1/public/comics/${comic.dataset.id}?apikey=${apiKey}`)
+                        console.log("hice click a un comic con el id ", comic.dataset.id)
+                        fetch(`https://gateway.marvel.com/v1/public/comics/${comic.dataset.id}?apikey=${apiKey}`)
 
-                    .then(res => res.json())
-                        .then(dataComic => {
-                            console.log(dataComic)
-                            limpiarResultados()
+                        .then(res => res.json())
+                            .then(dataComic => {
+                                console.log(dataComic)
+                                limpiarResultados()
 
 
-                            dataComic.data.results.map(datosComic => {
-                                resultados.innerHTML = `
+                                dataComic.data.results.map(datosComic => {
+                                    resultados.innerHTML = `
                             <article class="info-comic">
                                         <div class="info-comic-img">
                                         <img src="${datosComic.thumbnail.path}.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
@@ -69,21 +71,21 @@ const buscarComics = (url, nombre) => {
                                         <p>${datosComic.description}</p>
                                         </div>
                                         </article>`
-                            })
+                                })
 
 
-                            fetch(`https://gateway.marvel.com/v1/public/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
+                                fetch(`https://gateway.marvel.com/v1/public/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
 
-                            .then(res => res.json())
-                                .then(infodataComic => {
-                                    console.log(infodataComic)
-                                    const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
-                                    infoExtraComicYPersonajes.innerHTML = ""
-                                    infodataComic.data.results.map(infoExtra => {
-                                        infoExtraComicYPersonajes.classList.remove('hidden')
+                                .then(res => res.json())
+                                    .then(infodataComic => {
+                                        console.log(infodataComic)
+                                        const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
+                                        infoExtraComicYPersonajes.innerHTML = ""
+                                        infodataComic.data.results.map(infoExtra => {
+                                            infoExtraComicYPersonajes.classList.remove('hidden')
 
-                                        infoExtraComicYPersonajes.innerHTML += `
-                                       
+                                            infoExtraComicYPersonajes.innerHTML += `
+                                        
                                         <article class="tarjeta-info-extra-contenedor">
                                         <div class="tarjeta-info-extra-img">
                                         <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
@@ -95,29 +97,26 @@ const buscarComics = (url, nombre) => {
                                        `
 
 
+                                        })
+
                                     })
-
-                                })
-                        })
+                            })
 
 
 
-                }
+                    }
 
 
+
+                })
 
             })
 
-        })
-
-}
-
+    }
+    //buscar personaje y comic
 
 const buscarPersonajes = (url, nombre) => {
-    fetch(`
-                                                                        $ { urlBase + url } ? apikey = $ { apiKey }
-                                                                        $ { ordenarPesronajesAZ }
-                                                                        `)
+    fetch(`${urlBase + url}?apikey=${apiKey}`)
         .then((res) => {
             return res.json()
         })
@@ -125,30 +124,34 @@ const buscarPersonajes = (url, nombre) => {
             console.log(characters)
             const resultados = document.querySelector('.resultados')
             resultados.innerHTML = ""
-            characters.data.results.map(characters => {
-                resultados.innerHTML += ` < article class = "comic"
-                                                                        data - id = "${characters.id}" >
-                                                                            <
-                                                                            div class = "comic-img-container" >
-                                                                            <
-                                                                            img src = "${characters.thumbnail.path}.${characters.thumbnail.extension}"
-                                                                        alt = ""
-                                                                        class = "comic-img-portada" >
-                                                                            <
-                                                                            /div> <
-                                                                            h3 class = "comic-titulo" > $ { characters[nombre] } < /h3> <
-                                                                            /article>
-                                                                        `
+            characters.data.results.map(personajes => {
+                resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
+                <div class="tarjeta-info-extra-img">
+                   <img src="${personajes.thumbnail.path}.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+                </div>
+                <div class="tarjeta-info-extra">
+                <h3 class="tarjeta-info-extra-titulo"> ${personajes[nombre]}</h3>
+                </div>
+                </article>
+                `
+                    // <article class="tarjeta-info-extra-contenedor">
+                    // <div class="tarjeta-info-extra-img">
+                    // <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+                    // </div>
+                    // <div class="tarjeta-info-extra">
+                    // <h2 class="tarjeta-info-extra-titulo">${infoExtra.name}</h2>
+                    // </div>
+                    // </article>
+                    // `
             })
 
-            const listaDePersonajes = document.querySelectorAll('.comic');
+            const listaDePersonajes = document.querySelectorAll('.tarjeta-info-extra-contenedor');
             console.log(listaDePersonajes)
             listaDePersonajes.forEach(characters => {
                 characters.onclick = () => {
 
                     console.log("hice click a un personaje con el id ", characters.dataset.id)
-                    fetch(`
-                                                                        https: //gateway.marvel.com/v1/public/characters/${characters.dataset.id}?apikey=${apiKey}`)
+                    fetch(`https://gateway.marvel.com/v1/public/characters/${characters.dataset.id}?apikey=${apiKey}`)
 
                     .then(res => res.json())
                         .then(dataPersonaje => {
@@ -166,18 +169,39 @@ const buscarPersonajes = (url, nombre) => {
                             <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
                                     `
                             })
+                            fetch(`https://gateway.marvel.com/v1/public/characters/${characters.dataset.id}/comics?apikey=${apiKey}`)
+
+                            .then(res => res.json())
+                                .then(infopersonajesComics => {
+                                    console.log(infopersonajesComics)
+                                    const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
+                                    infoExtraComicYPersonajes.innerHTML = ""
+                                    infopersonajesComics.data.results.map(infoExtra => {
+                                        infoExtraComicYPersonajes.classList.remove('hidden')
+
+                                        infoExtraComicYPersonajes.innerHTML += `<article data-id="${infoExtra.id}" class="comic">
+                                                          <div class="comic-img-container">
+                                                      <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
+                                                             </div>
+                                                         <h3 class="comic-titulo"> ${infoExtra.title}</h3>
+                                                          </article>`
+
+                                    })
+                                })
+
+
+
 
                         })
 
-
-
-
                 }
+
+
             })
 
+
+
         })
-
-
 }
 buscarComics("comics", "title")
 
@@ -203,6 +227,8 @@ const filtrarPorTipo = () => {
 
 
 }
+
+
 
 siguientePagina.onclick = () => {
     paginaActual++

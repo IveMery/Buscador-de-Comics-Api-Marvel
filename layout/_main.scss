@@ -63,7 +63,7 @@
         flex-wrap: wrap;
         flex-grow: 1;
         justify-content: center;
-        align-items: center;
+        //align-items: center;
         // background-color: green;
         width: 100%;
         box-sizing: border-box;
@@ -127,6 +127,7 @@
         background-color: black;
         margin: 30px;
         margin-top: 40px;
+        cursor: pointer;
         .tarjeta-info-extra-img {
             width: 200px;
             height: 280px;
@@ -143,10 +144,12 @@
         .tarjeta-info-extra-titulo {
             color: white;
             text-align: center;
+            margin: 15px;
         }
     }
     
     .dataExtra-comic-y-personajes {
         display: flex;
         margin: 180px;
+        flex-wrap: wrap;
     }

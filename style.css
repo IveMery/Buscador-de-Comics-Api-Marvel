@@ -137,9 +137,6 @@ main .resultados-seccion {
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
   width: 100%;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -210,6 +207,7 @@ main .resultados-seccion {
   background-color: black;
   margin: 30px;
   margin-top: 40px;
+  cursor: pointer;
 }
 
 .tarjeta-info-extra-contenedor .tarjeta-info-extra-img {
@@ -230,6 +228,7 @@ main .resultados-seccion {
 .tarjeta-info-extra .tarjeta-info-extra-titulo {
   color: white;
   text-align: center;
+  margin: 15px;
 }
 
 .dataExtra-comic-y-personajes {
@@ -237,6 +236,8 @@ main .resultados-seccion {
   display: -ms-flexbox;
   display: flex;
   margin: 180px;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 
 .contenedor-logo {
