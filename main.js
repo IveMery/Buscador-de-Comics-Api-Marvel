@@ -21,6 +21,9 @@ const paginaFinal = document.getElementById('pagina-final')
 const paginaPrevia = document.getElementById('pagina-previa')
 const primeraPagina = document.getElementById('primera-pagina')
 
+let contadorResultados = document.querySelector('.cuenta-resultados')
+
+
 const limpiarResultados = () => {
     resultados.innerHTML = ""
 }
@@ -33,8 +36,11 @@ const buscarComics = (url, nombre) => {
         })
         .then((comics) => {
             console.log(comics)
+
             limpiarResultados()
+
             comics.data.results.map(comic => {
+
                 resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
               <div class="comic-img-container">
               <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
@@ -80,9 +86,10 @@ const infoComic = () => {
                         .then(infodataComic => {
                             console.log(infodataComic)
                             const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
+                            const contenedorInfoExtra = document.querySelector('.contenedor-info-extra')
                             infoExtraComicYPersonajes.innerHTML = ""
                             infodataComic.data.results.map(infoExtra => {
-                                infoExtraComicYPersonajes.classList.remove('hidden')
+                                contenedorInfoExtra.classList.remove('hidden')
                                 infoExtraComicYPersonajes.innerHTML += `
                         <article class="tarjeta-info-extra-contenedor">
                         <div class="tarjeta-info-extra-img">
@@ -111,6 +118,7 @@ const buscarPersonajes = (url, nombre) => {
         })
         .then((characters) => {
             console.log(characters)
+
             const resultados = document.querySelector('.resultados')
             resultados.innerHTML = ""
             characters.data.results.map(personajes => {

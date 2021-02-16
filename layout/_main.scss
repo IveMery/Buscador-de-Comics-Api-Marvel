@@ -1,154 +1,163 @@
-    .contenedor-buscador {
-        display: flex;
-        justify-content: space-around;
-        margin: 40px 0 40px 0;
-        align-items: flex-end;
-    }
-    
-    .fa-search {
-        position: relative;
-        top: 40px;
-        font-size: 18px;
-        left: 5px;
-    }
-    
-    label {
-        font-size: 13px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-        color: $color-texto-terciario;
-        margin-right: 10px;
-    }
-    
-    main {
-        display: flex;
-        flex-direction: column;
-        margin: 0 40px 0 40px;
-        flex-grow: 1;
-        .titulo-de-seccion {
-            @extend %titulos-de-secciones;
+        .contenedor-buscador {
+            display: flex;
+            justify-content: space-around;
+            margin: 40px 0 40px 0;
+            align-items: flex-end;
         }
-        .input-barra-de-busqueda {
-            border: 0;
-            border-bottom: 2px solid #151515;
-            width: 100%;
-            padding: 5px 35px;
-            border-radius: 0;
-            font-size: 26px;
-            margin-top: 10px;
-            margin-right: 160px;
-            box-sizing: border-box;
+        
+        .fa-search {
+            position: relative;
+            top: 40px;
+            font-size: 18px;
+            left: 5px;
         }
-        .contador-resultados {
-            font-size: $font-size-contador-resultados;
+        
+        label {
+            font-size: 13px;
             font-weight: bold;
             letter-spacing: 1px;
             text-transform: uppercase;
             color: $color-texto-terciario;
-            //margin-right: 10px;
-            margin: 15px 0 15px 0;
+            margin-right: 10px;
         }
-        #tipo,
-        #orden {
-            @extend %estilos-formularios-opciones;
-        }
-        .resultados-seccion {
-            margin-left: 160px;
-        }
-    }
-    
-    .resultados {
-        display: flex;
-        flex-wrap: wrap;
-        flex-grow: 1;
-        justify-content: center;
-        //align-items: center;
-        width: 100%;
-        box-sizing: border-box;
-    }
-    
-    .comic {
-        // margin: 45px;
-        height: 400px;
-        width: 240px;
-        margin: 40px 20px 40px 20px;
-        // background-color: rosybrown;
-        cursor: pointer;
-        &-img-container {
-            width: 240px;
-            height: 380px;
-            overflow: hidden;
-        }
-        &-img-portada {
-            width: 100%;
-            height: 100%;
-        }
-        .comic-titulo {
-            margin: 10px;
-            width: 200px;
-            font-size: 19px;
-        }
-    }
-    
-    .paginas {
-        @extend %centrar-flex;
-        margin: 80px 0 80px 0;
-    }
-    
-    .info-comic {
-        display: flex;
-        width: 1300px;
-        height: 600px;
-        .info-comic-img {
-            width: 350px;
-            height: 600px;
-            .info-comic-img-portada {
-                width: 350px;
-                height: 100%;
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            margin: 0 40px 0 40px;
+            flex-grow: 1;
+            .titulo-de-seccion {
+                @extend %titulos-de-secciones;
+            }
+            .input-barra-de-busqueda {
+                border: 0;
+                border-bottom: 2px solid #151515;
+                width: 100%;
+                padding: 5px 35px;
+                border-radius: 0;
+                font-size: 26px;
+                margin-top: 10px;
+                margin-right: 160px;
+                box-sizing: border-box;
+            }
+            .contador-resultados {
+                font-size: $font-size-contador-resultados;
+                font-weight: bold;
+                letter-spacing: 1px;
+                text-transform: uppercase;
+                color: $color-texto-terciario;
+                //margin-right: 10px;
+                margin: 15px 0 15px 0;
+            }
+            #tipo,
+            #orden {
+                @extend %estilos-formularios-opciones;
+            }
+            .resultados-seccion {
+                margin-left: 160px;
             }
         }
-        .info-comic-datos {
-            width: 600px;
-            margin-left: 60px;
+        
+        .resultados {
+            display: flex;
+            flex-wrap: wrap;
+            flex-grow: 1;
+            justify-content: center;
+            //align-items: center;
+            width: 100%;
+            box-sizing: border-box;
         }
-    }
-    
-    .tarjeta-info-extra-contenedor {
-        width: 200px;
-        height: 400px;
-        display: flex;
-        flex-direction: column;
-        background-color: black;
-        margin: 30px;
-        margin-top: 40px;
-        cursor: pointer;
-        .tarjeta-info-extra-img {
-            width: 200px;
-            height: 280px;
-            .tarjeta-info-extra-img-portada {
+        
+        .comic {
+            // margin: 45px;
+            height: 400px;
+            width: 240px;
+            margin: 40px 20px 40px 20px;
+            // background-color: rosybrown;
+            cursor: pointer;
+            &-img-container {
+                width: 240px;
+                height: 380px;
+                overflow: hidden;
+            }
+            &-img-portada {
                 width: 100%;
                 height: 100%;
             }
+            .comic-titulo {
+                margin: 10px;
+                width: 200px;
+                font-size: 19px;
+            }
         }
-    }
-    
-    .tarjeta-info-extra {
-        border: 0;
-        border-top: 5px solid red;
-        .tarjeta-info-extra-titulo {
-            color: white;
-            text-align: center;
-            margin: 15px;
+        
+        .paginas {
+            @extend %centrar-flex;
+            margin: 80px 0 80px 0;
         }
-    }
-    
-    .dataExtra-comic-y-personajes {
-        display: flex;
-        margin: 0 180px 0 180px;
-        flex-wrap: wrap;
-    }
-    
-    .hidden {
-        display: none;
-    }
+        
+        .info-comic {
+            display: flex;
+            width: 1300px;
+            height: 600px;
+            .info-comic-img {
+                width: 350px;
+                height: 600px;
+                .info-comic-img-portada {
+                    width: 350px;
+                    height: 100%;
+                }
+            }
+            .info-comic-datos {
+                width: 600px;
+                margin-left: 60px;
+            }
+        }
+        
+        .tarjeta-info-extra-contenedor {
+            width: 200px;
+            height: 400px;
+            display: flex;
+            flex-direction: column;
+            background-color: black;
+            margin: 30px;
+            margin-top: 40px;
+            cursor: pointer;
+            .tarjeta-info-extra-img {
+                width: 200px;
+                height: 280px;
+                .tarjeta-info-extra-img-portada {
+                    width: 100%;
+                    height: 100%;
+                }
+            }
+        }
+        
+        .tarjeta-info-extra {
+            border: 0;
+            border-top: 5px solid red;
+            .tarjeta-info-extra-titulo {
+                color: white;
+                text-align: center;
+                margin: 15px;
+            }
+        }
+        
+        .dataExtra-comic-y-personajes {
+            display: flex;
+            // margin: 0 180px 0 180px;
+            margin: 0 80px 0 80px;
+            flex-wrap: wrap;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .contenedor-info-extra {
+            margin: 20px 0 0 150px;
+        }
+        
+        .titulo-info-extra {
+            margin: 20px;
+        }

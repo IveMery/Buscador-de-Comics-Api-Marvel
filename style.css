@@ -233,13 +233,21 @@ main .resultados-seccion {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  margin: 0 180px 0 180px;
+  margin: 0 80px 0 80px;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
 }
 
 .hidden {
   display: none;
+}
+
+.contenedor-info-extra {
+  margin: 20px 0 0 150px;
+}
+
+.titulo-info-extra {
+  margin: 20px;
 }
 
 .contenedor-logo {
