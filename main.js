@@ -5,7 +5,7 @@ const ordenarComicsDeLaAZ = '&orderBy=title'
 const ordenarComicsDeLaAZA = '&orderBy=-title'
 const ordenarPesronajesAZ = '&orderBy=name'
 const ordenarPesronajesZA = '&orderBy=-name'
-const filtroBusqueda = document.querySelector('#filtro')
+const busquedaPorInput = document.querySelector('#filtro')
     // form
 const form = document.forms[0];
 const tipo = document.getElementById('tipo')
@@ -192,15 +192,18 @@ form.onsubmit = (e) => {
 const filtrarPorTipo = () => {
     console.log(tipo.value)
     if (tipo.value === "comics") {
+
         buscarComics("comics", "title")
 
     }
     if (tipo.value === "personajes") {
+
         buscarPersonajes("characters", "name")
-        console.log(filtroBusqueda.value)
-            // buscarComicOPersonajes("characters", "name")
+
+        // buscarComicOPersonajes("characters", "name")
     }
 }
+
 
 
 //Paginas
