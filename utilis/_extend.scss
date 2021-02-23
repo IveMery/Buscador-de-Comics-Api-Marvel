@@ -28,3 +28,9 @@
     cursor: pointer;
     transition: 0.2s;
 }
+
+%subtitulos {
+    font-size: $subtitulos-font-size;
+    font-weight: bold;
+    margin: $margin-subtitulos;
+}

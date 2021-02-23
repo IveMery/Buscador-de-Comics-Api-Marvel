@@ -20,11 +20,12 @@ const resultados = document.querySelector('.resultados')
 const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
 const contenedorInfoExtra = document.querySelector('.contenedor-info-extra')
 const tituloDeInformacionExtra = document.querySelector('.subtitulo-info-extra')
+const infoResultados = document.querySelector('.resultados-seccion')
 
 //spinner
-const spinner = document.querySelector('.contenedor-spinner')
-console.log(spinner)
-    //paginas
+const spinner = document.querySelector('.lds-hourglass')
+
+//paginas
 const comicsPorPagina = 20;
 let paginaActual = 0;
 let paginaActualPersonajes = 0;
@@ -40,15 +41,36 @@ const limpiarResultados = () => {
     resultados.innerHTML = ""
 }
 
-fetch(`${urlBase}/comics?apikey=${apiKey}${ordenarComicsDeLaAZ}&offset=${paginaActual * comicsPorPagina}`)
-    .then((res) => {
-        return res.json()
-    })
-    .then((comics) => {
+const mostrarSpinner = () => {
+    spinner.classList.remove('hidden')
+}
 
-        mostrarTarjetaComics(comics)
-    })
+const ocultarSpinner = () => {
+    spinner.classList.add('hidden')
+}
 
+const limpiarContenedorInfoExtra = () => {
+    contenedorInfoExtra.classList.add('hidden')
+}
+
+
+
+const fetchInicial = () => {
+    infoResultados.classList.remove('hidden')
+    fetch(`${urlBase}/comics?apikey=${apiKey}${ordenarComicsDeLaAZ}&offset=${paginaActual * comicsPorPagina}`)
+        .then((res) => {
+            return res.json()
+        })
+        .then((comics) => {
+
+            mostrarTarjetaComics(comics)
+            ocultarSpinner()
+
+        })
+
+}
+
+fetchInicial()
 
 tipo.onclick = () => {
     opcionesAlselecionarOrdenPersonajes()
@@ -68,10 +90,12 @@ const opcionesAlselecionarOrdenPersonajes = () => {
         <option value="-focDate">Mas Nuevos</option>
         <option value="focDate">Mas Viejos</option>`
     }
+
+
 }
 
-
 opcionesAlselecionarOrdenPersonajes()
+
 form.onsubmit = (e) => {
     e.preventDefault();
     filtrarPorInputTipoOrden(paginaActual, input, orden, tipo)
@@ -85,6 +109,7 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
 
     if (tipo.value === 'comics' && orden.value && input.value) {
         // console.log(orden.value)
+        mostrarSpinner()
         fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&titleStartsWith=${input.value}&offset=${paginaActual * comicsPorPagina}`)
             .then((res) => {
                 return res.json()
@@ -92,18 +117,19 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
             .then((comics) => {
 
                 mostrarTarjetaComics(comics)
-
-
+                ocultarSpinner()
             })
     } else if (tipo.value === 'characters' && orden.value && input.value) {
         console.log('elegi personajes')
+        mostrarSpinner()
         fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&nameStartsWith=${input.value}&offset=${paginaActualPersonajes * comicsPorPagina}`)
             .then((res) => {
                 return res.json()
             })
             .then((characters) => {
-                console.log(characters)
+
                 mostrarTarjetaPersonajes(characters)
+                ocultarSpinner()
             })
     } else {
         inputVacio()
@@ -112,7 +138,7 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
 
 const inputVacio = () => {
         if (tipo.value === 'comics' && orden.value === 'title') {
-
+            mostrarSpinner()
             fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
@@ -120,66 +146,80 @@ const inputVacio = () => {
                 .then((comics) => {
 
                     mostrarTarjetaComics(comics)
+                    ocultarSpinner()
                 })
 
 
         } else if (tipo.value === 'characters' && orden.value === 'name') {
             console.log('elegi personajes de la a-z')
+            mostrarSpinner()
             fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActualPersonajes * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((characters) => {
                     console.log(characters)
+
                     mostrarTarjetaPersonajes(characters)
+                    ocultarSpinner()
                 })
 
         }
         if (tipo.value === 'comics' && orden.value === '-title') {
-
+            mostrarSpinner()
             fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((comics) => {
-                    // console.log(comics)
 
                     mostrarTarjetaComics(comics)
+                    ocultarSpinner()
                 })
 
         } else if (tipo.value === 'characters' && orden.value === '-name') {
-            console.log('elegi personajes de la z-a')
+            mostrarSpinner()
             fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActualPersonajes * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((characters) => {
                     console.log(characters)
+
                     mostrarTarjetaPersonajes(characters)
+                    ocultarSpinner()
                 })
 
         }
         if (tipo.value === 'comics' && orden.value === '-focDate') {
+            mostrarSpinner()
             fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((comics) => {
+
                     mostrarTarjetaComics(comics)
+                    ocultarSpinner()
                 })
         }
         if (tipo.value === 'comics' && orden.value === 'focDate') {
+            mostrarSpinner()
             fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
                 .then((res) => {
                     return res.json()
                 })
                 .then((comics) => {
+
                     mostrarTarjetaComics(comics)
+                    ocultarSpinner()
                 })
         }
     }
     // buscar comic , hacer click en el comic y mostrar sus  personajes
 const mostrarTarjetaComics = (comics) => {
+        infoResultados.classList.remove('hidden')
+        contadorResultados.innerHTML = comics.data.total
         limpiarResultados()
         comics.data.results.map(comic => {
             resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
@@ -191,73 +231,89 @@ const mostrarTarjetaComics = (comics) => {
         })
 
         infoComic()
+
+        limpiarContenedorInfoExtra()
     }
     // seleccionar comic
 const infoComic = (comics) => {
+
     const listaDecomics = document.querySelectorAll('.comic');
-    console.log(listaDecomics)
     listaDecomics.forEach(comic => {
         comic.onclick = () => {
-            console.log("hice click a un comic con el id ", comic.dataset.id)
             fetch(`${urlBase}/comics/${comic.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataComic => {
-                    console.log(dataComic)
+                    mostrarSpinner()
                     limpiarResultados()
                     dataComic.data.results.map(datosComic => {
                         resultados.innerHTML = `
-                            <article class="info-comic">
+                            <article class="info-comic" data-id = ${datosComic.id}>
                                         <div class="info-comic-img">
                                         <img src="${datosComic.thumbnail.path}.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
                                         </div>
                                         <div class="info-comic-datos">
                                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
-                                        <p>Publicado:</p>
-                                        <p>${datosComic.dates[0].date}</p>
-                                        <p> Guionistas:</p>
-                                        <p>${datosComic.creators.items[0].name}</p>
-                                        <p> Descripción:</p>
-                                        <p>${datosComic.description}</p>
+                                        <p class="subtitulos">Publicado:</p>
+                                        <p class="respuesta-subtitulos">${datosComic.dates[0].date}</p>
+                                        <p class="subtitulos"> Guionistas:</p>
+                                        <p class="respuesta-subtitulos">${datosComic.creators.items[0].name}</p>
+                                        <p class="subtitulos"> Descripción:</p>
+                                        <p class="respuesta-subtitulos">${datosComic.description}</p>
                                         </div>
                                         </article>`
                     })
+                    infoResultados.classList.add('hidden')
                     infoComicPersonajes(comic)
+                    ocultarSpinner()
+
+
                 })
         }
     })
+
+
 }
 
 //mostrar personajes de un comic
 const infoComicPersonajes = (comic) => {
 
+
     fetch(`${urlBase}/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infodataComic => {
-            console.log(infodataComic)
+
             infoExtraComicYPersonajes.innerHTML = ""
             infodataComic.data.results.map(infoExtra => {
                 contenedorInfoExtra.classList.remove('hidden')
                 tituloDeInformacionExtra.innerHTML = `Personajes`
                 infoExtraComicYPersonajes.innerHTML += `
-                <article class="tarjeta-info-extra-contenedor">
+                <article class="tarjeta-info-extra-contenedor" data-id="${infoExtra.id}">
+                
                 <div class="tarjeta-info-extra-img">
                 <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
                 </div>
                 <div class="tarjeta-info-extra">
                 <h2 class="tarjeta-info-extra-titulo">${infoExtra.name}</h2>
+               
                 </div>
                 </article>
+               
                `
+
             })
+
+            infoPersonaje(comic)
+
+
         })
 }
 
 
-//// buscar personajes , hacer click en el personaje y mostrar sus comics en los que
+//// buscar personajes , hacer click en el personaje y mostrar sus comics en los que aparece
 const mostrarTarjetaPersonajes = (characters) => {
+    infoResultados.classList.remove('hidden')
+    contadorResultados.innerHTML = characters.data.total
     limpiarResultados()
-    const resultados = document.querySelector('.resultados')
-    resultados.innerHTML = ""
     characters.data.results.map(personajes => {
         resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
                 <div class="tarjeta-info-extra-img">
@@ -270,31 +326,40 @@ const mostrarTarjetaPersonajes = (characters) => {
                 `
     })
     infoPersonaje()
+    limpiarContenedorInfoExtra()
 }
 
+//este es de los personajes para poner en el otro
 const infoPersonaje = () => {
+    // infoResultados.classList.add('hidden')
+    // mostrarSpinner()
     const listaDePersonajes = document.querySelectorAll('.tarjeta-info-extra-contenedor');
-    console.log(listaDePersonajes)
     listaDePersonajes.forEach(characters => {
         characters.onclick = () => {
-            console.log("hice click a un personaje con el id ", characters.dataset.id)
             fetch(`${urlBase}/characters/${characters.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataPersonaje => {
-                    console.log(dataPersonaje)
+
                     limpiarResultados()
                     dataPersonaje.data.results.map(datosPersonajes => {
                         resultados.innerHTML = `
-                        <article class="info-comic">
+                        <article class="info-comic" data-id="${datosPersonajes.id}">
                                     <div class="info-comic-img">
                                     <img src="${datosPersonajes.thumbnail.path}.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
                                     </div>
                                     <div class="info-comic-datos">
                         <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
+                        <p class="respuesta-subtitulos">${datosPersonajes.description}</p>
                                 `
                     })
+
+                    infoResultados.classList.add('hidden')
+
                     mostrarInfoPersonajesEnComics(characters)
+
+
                 })
+
         }
     })
 }
@@ -305,25 +370,30 @@ const mostrarInfoPersonajesEnComics = (characters) => {
     fetch(`${urlBase}/characters/${characters.dataset.id}/comics?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infopersonajesComics => {
-            console.log(infopersonajesComics)
-                //const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
-            console.log(infoExtraComicYPersonajes)
+
             infoExtraComicYPersonajes.innerHTML = ""
             infopersonajesComics.data.results.map(infoExtra => {
                 contenedorInfoExtra.classList.remove('hidden')
-                infoExtraComicYPersonajes.classList.remove('hidden')
+                    //infoExtraComicYPersonajes.classList.remove('hidden')
                 tituloDeInformacionExtra.innerHTML = `Comics`
                 infoExtraComicYPersonajes.innerHTML +=
                     `<article data-id="${infoExtra.id}" class="comic">
                               <div class="comic-img-container">
                               <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
                               </div>
+                               
                                <h3 class="comic-titulo"> ${infoExtra.title}</h3>
+                               
+                               
                                 </article>`
 
             })
+
+            infoComic(characters)
+                //ocultarSpinner()
         })
 }
+
 
 
 //Paginas
@@ -332,6 +402,8 @@ siguientePagina.onclick = () => {
 
         paginaActual++
         filtrarPorInputTipoOrden(paginaActual, input, orden)
+
+        console.log(paginaActual)
             //filtrarPorTipoYOrden(paginaActual)
 
         // } else {
@@ -345,6 +417,8 @@ paginaFinal.onclick = () => {
     if (tipo.value === "comics") {
         paginaActual++
         paginaActual = 2422
+        console.log(paginaActual)
+
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
 
@@ -359,6 +433,7 @@ paginaPrevia.onclick = () => {
     if (tipo.value === "comics") {
         paginaActual--
         paginaActual - 20
+        console.log(paginaActual)
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
             // } else {
@@ -371,6 +446,8 @@ paginaPrevia.onclick = () => {
 primeraPagina.onclick = () => {
     if (tipo.value === "comics") {
         paginaActual = 0
+        console.log(paginaActual)
+
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
             // } else {
@@ -379,15 +456,3 @@ primeraPagina.onclick = () => {
             // }
     }
 }
-
-
-// const deshabilitarTodosLosBotones = () => {
-//     primeraPagina.disabled = false
-//     paginaPrevia.disabled = false
-//     paginaFinal.disabled = false
-//     siguientePagina
-
-//     siguientePagina.onmousemove = () => {
-//         console.log('deshabilite botones')
-//     }
-// }
