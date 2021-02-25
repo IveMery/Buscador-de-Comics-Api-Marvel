@@ -238,8 +238,9 @@ const mostrarTarjetaComics = (comics) => {
     })
 
     infoComic()
-    deshabilitarBotonesPrevios()
     deshabilitarBotonesPosteriores()
+    deshabilitarBotonesPrevios()
+
     limpiarContenedorInfoExtra()
 
 }
@@ -495,15 +496,18 @@ const deshabilitarBotonesPosteriores = () => {
     if (paginaActual >= 2426) {
         paginaFinal.disabled = true
         siguientePagina.disabled = true
+
     } else {
         paginaFinal.disabled = false
         siguientePagina.disabled = false
+
     }
-    if (tipo.value === 'characters' && paginaActual === 74) {
+    if (tipo.value === 'characters' && paginaActual == 74) {
 
         paginaFinal.disabled = true
         siguientePagina.disabled = true
-    } else {
+    } else if (tipo.value === 'characters' && paginaActual !== 74) {
+
         paginaFinal.disabled = false
         siguientePagina.disabled = false
     }
