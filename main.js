@@ -65,6 +65,8 @@ const fetchInicial = () => {
 
             mostrarTarjetaComics(comics)
             ocultarSpinner()
+            deshabilitarBotonesPrevios()
+            deshabilitarBotonesPosteriores()
 
         })
 
@@ -231,8 +233,10 @@ const mostrarTarjetaComics = (comics) => {
         })
 
         infoComic()
-
+        deshabilitarBotonesPrevios()
+        deshabilitarBotonesPosteriores()
         limpiarContenedorInfoExtra()
+
     }
     // seleccionar comic
 const infoComic = (comics) => {
@@ -265,7 +269,7 @@ const infoComic = (comics) => {
                     infoResultados.classList.add('hidden')
                     infoComicPersonajes(comic)
                     ocultarSpinner()
-
+                    deshabilitarTodosLosBotones()
 
                 })
         }
@@ -401,6 +405,8 @@ siguientePagina.onclick = () => {
     if (tipo.value === 'comics') {
 
         paginaActual++
+
+        deshabilitarBotonesPosteriores()
         filtrarPorInputTipoOrden(paginaActual, input, orden)
 
         console.log(paginaActual)
@@ -416,8 +422,11 @@ siguientePagina.onclick = () => {
 paginaFinal.onclick = () => {
     if (tipo.value === "comics") {
         paginaActual++
-        paginaActual = 2422
+        paginaActual = 2426
         console.log(paginaActual)
+        deshabilitarBotonesPosteriores()
+
+
 
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
@@ -434,6 +443,7 @@ paginaPrevia.onclick = () => {
         paginaActual--
         paginaActual - 20
         console.log(paginaActual)
+        deshabilitarBotonesPrevios()
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
             // } else {
@@ -448,6 +458,7 @@ primeraPagina.onclick = () => {
         paginaActual = 0
         console.log(paginaActual)
 
+        deshabilitarBotonesPrevios()
 
         filtrarPorInputTipoOrden(paginaActual, input, orden)
             // } else {
@@ -455,4 +466,32 @@ primeraPagina.onclick = () => {
             //     buscarPersonajes('characters', 'name', 'paginaActualPersonajes')
             // }
     }
+}
+
+const deshabilitarBotonesPrevios = () => {
+
+    if (paginaActual === 0) {
+        primeraPagina.disabled = true
+        paginaPrevia.disabled = true
+    } else if (paginaActual !== 0) {
+        primeraPagina.disabled = false
+        paginaPrevia.disabled = false
+    }
+}
+
+const deshabilitarBotonesPosteriores = () => {
+    if (paginaActual >= 2426) {
+        paginaFinal.disabled = true
+        siguientePagina.disabled = true
+    } else {
+        paginaFinal.disabled = false
+        siguientePagina.disabled = false
+    }
+}
+
+const deshabilitarTodosLosBotones = () => {
+    primeraPagina.disabled = true
+    paginaPrevia.disabled = true
+    paginaFinal.disabled = true
+    siguientePagina.disabled = true
 }
