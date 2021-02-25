@@ -492,7 +492,15 @@ const deshabilitarBotonesPrevios = () => {
 // personajes llegar al final y deshabilutar botonrs
 
 const deshabilitarBotonesPosteriores = () => {
-    if (paginaActual >= 2426 || paginaActual == 74) {
+    if (paginaActual >= 2426) {
+        paginaFinal.disabled = true
+        siguientePagina.disabled = true
+    } else {
+        paginaFinal.disabled = false
+        siguientePagina.disabled = false
+    }
+    if (tipo.value === 'characters' && paginaActual === 74) {
+
         paginaFinal.disabled = true
         siguientePagina.disabled = true
     } else {
@@ -500,6 +508,7 @@ const deshabilitarBotonesPosteriores = () => {
         siguientePagina.disabled = false
     }
 }
+
 
 
 
