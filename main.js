@@ -1,43 +1,34 @@
-// api
+// Api
 const urlBase = "https://gateway.marvel.com/v1/public/";
 const apiKey = 'fa4aa6e4fe839711358c5ab717c2ea05'
 const ordenarComicsDeLaAZ = '&orderBy=title'
-    // const ordenarComicsDeLaAZA = '&orderBy=-title'
-    // const ordenarPesronajesAZ = '&orderBy=name'
-    // const ordenarPesronajesZA = '&orderBy=-name'
-    // const ordenarPorNuevos = '&orderBy=-focDate'
-    // const ordenarPorviejos = '&orderBy=focDate'
 const input = document.querySelector('#filtro')
-    // form
+    // Form
 const form = document.forms[0];
 const tipo = document.getElementById('tipo')
 const orden = document.getElementById('orden')
 const botonBuscar = document.querySelector('.boton-principal')
+    //Contenedores de info
 const resultados = document.querySelector('.resultados')
-
-
-//contenedores de info
 const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
 const contenedorInfoExtra = document.querySelector('.contenedor-info-extra')
 const tituloDeInformacionExtra = document.querySelector('.subtitulo-info-extra')
 const infoResultados = document.querySelector('.resultados-seccion')
 const contadorResultadosSeleccionados = document.querySelector('.contador-resultados-detalles')
-
-//spinner
-const spinner = document.querySelector('.lds-hourglass')
-
-//paginas
+let contadorResultados = document.querySelector('.cuenta-resultados')
+let resutadosDeSeleccionados = document.querySelector('.contador-resultados-seleccionados')
+const descripcion = document.querySelector('.descripcion')
+    //Spinner
+const spinnerLoader = document.querySelector('.lds-hourglass')
+const overlayLoader = document.querySelector('.overlay')
+    //Paginas
 const comicsPorPagina = 20;
 let paginaActual = 0;
-let paginaActualPersonajes = 0;
+//let paginaActualPersonajes = 0;
 const siguientePagina = document.getElementById('siguiente-pagina')
 const paginaFinal = document.getElementById('pagina-final')
 const paginaPrevia = document.getElementById('pagina-previa')
 const primeraPagina = document.getElementById('primera-pagina')
-
-let contadorResultados = document.querySelector('.cuenta-resultados')
-let resutadosDeSeleccionados = document.querySelector('.contador-resultados-seleccionados')
-const descripcion = document.querySelector('.descripcion')
 
 
 const limpiarResultados = () => {
@@ -45,32 +36,45 @@ const limpiarResultados = () => {
 }
 
 const mostrarSpinner = () => {
-    spinner.classList.remove('hidden')
+    overlayLoader.classList.remove('hidden')
 }
 
 const ocultarSpinner = () => {
-    spinner.classList.add('hidden')
+    overlayLoader.classList.add('hidden')
 }
 
-const limpiarContenedorInfoExtra = () => {
+const ocultarContenedorInfoExtra = () => {
     contenedorInfoExtra.classList.add('hidden')
 }
 
+const mostrarContenedorInfoExtra = () => {
+    contenedorInfoExtra.classList.remove('hidden')
+}
 
+const limpiarResultadosInfoDetalles = () => {
+    infoExtraComicYPersonajes.innerHTML = ""
+}
+
+const mostrarInfoResultados = () => {
+    infoResultados.classList.remove('hidden')
+}
+
+const ocultarInfoResultados = () => {
+    infoResultados.classList.add('hidden')
+}
 
 const fetchInicial = () => {
-    infoResultados.classList.remove('hidden')
+    mostrarSpinner()
+    mostrarInfoResultados()
     fetch(`${urlBase}/comics?apikey=${apiKey}${ordenarComicsDeLaAZ}&offset=${paginaActual * comicsPorPagina}`)
         .then((res) => {
             return res.json()
         })
         .then((comics) => {
-
             mostrarTarjetaComics(comics)
-            ocultarSpinner()
             deshabilitarBotonesPrevios()
             deshabilitarBotonesPosteriores()
-
+            ocultarSpinner()
         })
 
 }
@@ -81,13 +85,9 @@ tipo.onclick = () => {
     opcionesAlselecionarOrdenPersonajes()
 }
 const opcionesAlselecionarOrdenPersonajes = () => {
-
-    console.log('hice click')
-
     if (tipo.value === "characters") {
-
         orden.innerHTML = `<option value="name">A-Z</option>;
-                         <option value="-name">Z-A</option>`;
+        <option value="-name">Z-A</option>`;
 
     } else if (tipo.value === 'comics') {
         orden.innerHTML = `<option value="title">A-Z</option>
@@ -95,8 +95,6 @@ const opcionesAlselecionarOrdenPersonajes = () => {
         <option value="-focDate">Mas Nuevos</option>
         <option value="focDate">Mas Viejos</option>`
     }
-
-
 }
 
 opcionesAlselecionarOrdenPersonajes()
@@ -104,35 +102,27 @@ opcionesAlselecionarOrdenPersonajes()
 form.onsubmit = (e) => {
     e.preventDefault();
     filtrarPorInputTipoOrden(paginaActual, input, orden, tipo)
-        //console.log(input.value)
-
 }
 
-// buscarComicOPersonajes("comics", "title")
 const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
-
-
+    mostrarSpinner()
     if (tipo.value === 'comics' && orden.value && input.value) {
-        // console.log(orden.value)
         mostrarSpinner()
         fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&titleStartsWith=${input.value}&offset=${paginaActual * comicsPorPagina}`)
             .then((res) => {
                 return res.json()
             })
             .then((comics) => {
-
                 mostrarTarjetaComics(comics)
                 ocultarSpinner()
             })
     } else if (tipo.value === 'characters' && orden.value && input.value) {
         console.log('elegi personajes')
-        mostrarSpinner()
         fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&nameStartsWith=${input.value}&offset=${paginaActual * comicsPorPagina}`)
             .then((res) => {
                 return res.json()
             })
             .then((characters) => {
-
                 mostrarTarjetaPersonajes(characters)
                 ocultarSpinner()
             })
@@ -142,291 +132,267 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
 }
 
 const inputVacio = () => {
-    if (tipo.value === 'comics' && orden.value === 'title') {
         mostrarSpinner()
-        fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((comics) => {
-
-                mostrarTarjetaComics(comics)
-                ocultarSpinner()
-            })
-
-
-    } else if (tipo.value === 'characters' && orden.value === 'name') {
-        console.log('elegi personajes de la a-z')
-        mostrarSpinner()
-        fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((characters) => {
-                console.log(characters)
-
-                mostrarTarjetaPersonajes(characters)
-                ocultarSpinner()
-            })
-
+        if (tipo.value === 'comics' && orden.value === 'title') {
+            fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((comics) => {
+                    mostrarTarjetaComics(comics)
+                    ocultarSpinner()
+                })
+        } else if (tipo.value === 'characters' && orden.value === 'name') {
+            fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((characters) => {
+                    mostrarTarjetaPersonajes(characters)
+                    ocultarSpinner()
+                })
+        }
+        if (tipo.value === 'comics' && orden.value === '-title') {
+            fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((comics) => {
+                    mostrarTarjetaComics(comics)
+                    ocultarSpinner()
+                })
+        } else if (tipo.value === 'characters' && orden.value === '-name') {
+            fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((characters) => {
+                    mostrarTarjetaPersonajes(characters)
+                    ocultarSpinner()
+                })
+        }
+        if (tipo.value === 'comics' && orden.value === '-focDate') {
+            fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((comics) => {
+                    mostrarTarjetaComics(comics)
+                    ocultarSpinner()
+                })
+        }
+        if (tipo.value === 'comics' && orden.value === 'focDate') {
+            fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
+                .then((res) => {
+                    return res.json()
+                })
+                .then((comics) => {
+                    mostrarTarjetaComics(comics)
+                    ocultarSpinner()
+                })
+        }
     }
-    if (tipo.value === 'comics' && orden.value === '-title') {
-        mostrarSpinner()
-        fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((comics) => {
-
-                mostrarTarjetaComics(comics)
-                ocultarSpinner()
-            })
-
-    } else if (tipo.value === 'characters' && orden.value === '-name') {
-        mostrarSpinner()
-        fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((characters) => {
-                console.log(characters)
-
-                mostrarTarjetaPersonajes(characters)
-                ocultarSpinner()
-            })
-
-    }
-    if (tipo.value === 'comics' && orden.value === '-focDate') {
-        mostrarSpinner()
-        fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((comics) => {
-
-                mostrarTarjetaComics(comics)
-                ocultarSpinner()
-            })
-    }
-    if (tipo.value === 'comics' && orden.value === 'focDate') {
-        mostrarSpinner()
-        fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
-            .then((res) => {
-                return res.json()
-            })
-            .then((comics) => {
-
-                mostrarTarjetaComics(comics)
-                ocultarSpinner()
-            })
-    }
-}
-
-
-// buscar comic , hacer click en el comic y mostrar sus  personajes
+    // Buscar comic , hacer click en el comic y mostrar sus  personajes
 const mostrarTarjetaComics = (comics) => {
-    infoResultados.classList.remove('hidden')
+    mostrarSpinner()
+    mostrarInfoResultados()
     contadorResultados.innerHTML = comics.data.total
     limpiarResultados()
     comics.data.results.map(comic => {
         resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
-              <div class="comic-img-container">
-              <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
-              </div>
-             <h3 class="comic-titulo"> ${comic.title}</h3>
-            </article>`
+        <div class="comic-img-container">
+        <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
+        </div>
+        <h3 class="comic-titulo"> ${comic.title}</h3>
+        </article>`
     })
-
     infoComic()
+    ocultarSpinner()
     deshabilitarBotonesPosteriores()
     deshabilitarBotonesPrevios()
-
-    limpiarContenedorInfoExtra()
-
+    ocultarContenedorInfoExtra()
 }
-datosComic = ''
-    // seleccionar comic
-const infoComic = (comics) => {
 
+
+// Seleccionar comic
+const infoComic = (comics) => {
+    mostrarSpinner()
     const listaDecomics = document.querySelectorAll('.comic');
     listaDecomics.forEach(comic => {
         comic.onclick = () => {
             fetch(`${urlBase}/comics/${comic.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataComic => {
-                    mostrarSpinner()
                     limpiarResultados()
-
                     dataComic.data.results.map(datosComic => {
-
-
                         resultados.innerHTML = `
-                            <article class="info-comic" data-id = ${datosComic.id}>
-                                        <div class="info-comic-img">
-                                        <img src="${datosComic.thumbnail.path}.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
-                                        </div>
-                                        <div class="info-comic-datos">
-                                        <h3 class="comic-titulo"> ${datosComic.title}</h3>
-                                        <p class="subtitulos">Publicado:</p>
-                                        <p class="respuesta-subtitulos">${datosComic.dates[0].date}</p>
-                                        <p class="subtitulos"> Guionistas:</p>
-                                        <p class="respuesta-subtitulos">${datosComic.creators.items[0].name}</p>
-                                        <p class="subtitulos"> Descripción:</p>
-                                        <p class="respuesta-subtitulos descripcion">${datosComic.description}</p>
-                                        </div>
-                                        </article>`
+                        <article class="info-comic" data-id = ${datosComic.id}>
+                        <div class="info-comic-img">
+                        <img src="${datosComic.thumbnail.path}.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                        </div>
+                        <div class="info-comic-datos">
+                        <h3 class="comic-titulo"> ${datosComic.title}</h3>
+                        <p class="subtitulos">Publicado:</p>
+                        <p class="respuesta-subtitulos">${datosComic.dates[0].date}</p>
+                        <p class="subtitulos"> Guionistas:</p>
+                        <p class="respuesta-subtitulos">${buscarEscritor(datosComic)}</p>
+                        <p class="subtitulos"> Descripción:</p>
+                        <p class="respuesta-subtitulos descripcion">${descripcionComic(datosComic)}</p>
+                        </div>
+                        </article>`
                     })
-
-                    infoResultados.classList.add('hidden')
+                    ocultarInfoResultados()
                     infoComicPersonajes(comic)
                     ocultarSpinner()
                     deshabilitarTodosLosBotones()
-
                 })
         }
     })
-
-
 }
 
+const buscarEscritor = (datosComic) => {
+    return datosComic.creators.items.map(creador => {
+        if (creador.role === 'writer') {
+            return ` ${creador.name}`
+        } else {
+            return ''
+        }
+    })
+}
 
-//mostrar personajes de un comic
+const descripcionComic = (datosComic) => {
+    if (datosComic.description === null) {
+        return ''
+    } else {
+        return `${datosComic.description}`
+    }
+}
+
+//Mostrar personajes de un comic
 const infoComicPersonajes = (comic) => {
-
-
+    mostrarSpinner()
     fetch(`${urlBase}/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infoDataComic => {
-            infoExtraComicYPersonajes.innerHTML = ""
+            limpiarResultadosInfoDetalles()
             infoDataComic.data.results.map(infoExtra => {
-                contenedorInfoExtra.classList.remove('hidden')
+                mostrarContenedorInfoExtra()
                 tituloDeInformacionExtra.innerHTML = `Personajes`
-
                 resutadosDeSeleccionados.innerHTML = infoDataComic.data.total
                 infoExtraComicYPersonajes.innerHTML += `
                 <article class="tarjeta-info-extra-contenedor" data-id="${infoExtra.id}">
-                
                 <div class="tarjeta-info-extra-img">
                 <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
                 </div>
                 <div class="tarjeta-info-extra">
                 <h2 class="tarjeta-info-extra-titulo">${infoExtra.name}</h2>
-               
                 </div>
-                </article>
-               
-               `
-
+                </article>`
             })
-
             infoPersonaje(comic)
-
-
+            ocultarSpinner()
         })
 }
 
-
-//// buscar personajes , hacer click en el personaje y mostrar sus comics en los que aparece
+// Buscar personajes , hacer click en el personaje y mostrar sus comics en los que aparece
 const mostrarTarjetaPersonajes = (characters) => {
-    infoResultados.classList.remove('hidden')
+    mostrarSpinner()
+    mostrarInfoResultados()
     contadorResultados.innerHTML = characters.data.total
     limpiarResultados()
     characters.data.results.map(personajes => {
         resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
-                <div class="tarjeta-info-extra-img">
-                   <img src="${personajes.thumbnail.path}.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
-                </div>
-                <div class="tarjeta-info-extra">
-                <h3 class="tarjeta-info-extra-titulo"> ${personajes.name}</h3>
-                </div>
-                </article>
-                `
+            <div class="tarjeta-info-extra-img">
+            <img src="${personajes.thumbnail.path}.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+            </div>
+            <div class="tarjeta-info-extra">
+            <h3 class="tarjeta-info-extra-titulo"> ${personajes.name}</h3>
+            </div>
+            </article>`
     })
     infoPersonaje()
+    ocultarSpinner()
     deshabilitarBotonesPrevios()
     deshabilitarBotonesPosteriores()
-    limpiarContenedorInfoExtra()
+    ocultarContenedorInfoExtra()
+
 }
 
-//este es de los personajes para poner en el otro
 const infoPersonaje = () => {
-    // infoResultados.classList.add('hidden')
-    // mostrarSpinner()
+    mostrarSpinner()
     const listaDePersonajes = document.querySelectorAll('.tarjeta-info-extra-contenedor');
     listaDePersonajes.forEach(characters => {
         characters.onclick = () => {
             fetch(`${urlBase}/characters/${characters.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataPersonaje => {
-
                     limpiarResultados()
                     dataPersonaje.data.results.map(datosPersonajes => {
                         resultados.innerHTML = `
-                        <article class="info-comic" data-id="${datosPersonajes.id}">
-                                    <div class="info-comic-img">
-                                    <img src="${datosPersonajes.thumbnail.path}.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
-                                    </div>
-                                    <div class="info-comic-datos">
-                        <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
-                        <p class="respuesta-subtitulos">${datosPersonajes.description}</p>
-                                `
+                    <article class="info-comic" data-id="${datosPersonajes.id}">
+                    <div class="info-comic-img">
+                    <img src="${datosPersonajes.thumbnail.path}.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                    </div>
+                    <div class="info-comic-datos">
+                    <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
+                    <p class="respuesta-subtitulos">${datosPersonajes.description}</p>`
                     })
-
-                    infoResultados.classList.add('hidden')
+                    ocultarInfoResultados()
+                    ocultarSpinner()
                     deshabilitarTodosLosBotones()
                     mostrarInfoPersonajesEnComics(characters)
-
-
                 })
-
         }
     })
 }
 
 
 const mostrarInfoPersonajesEnComics = (characters) => {
-
+    mostrarSpinner()
     fetch(`${urlBase}/characters/${characters.dataset.id}/comics?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infoPersonajesComics => {
             resutadosDeSeleccionados.innerHTML = infoPersonajesComics.data.total
-            infoExtraComicYPersonajes.innerHTML = ""
+            limpiarResultadosInfoDetalles()
             infoPersonajesComics.data.results.map(infoExtra => {
-                contenedorInfoExtra.classList.remove('hidden')
-                    //infoExtraComicYPersonajes.classList.remove('hidden')
+                mostrarContenedorInfoExtra()
                 tituloDeInformacionExtra.innerHTML = `Comics`
-                infoExtraComicYPersonajes.innerHTML +=
-                    `<article data-id="${infoExtra.id}" class="comic">
-                              <div class="comic-img-container">
-                              <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
-                              </div>
-                               
-                               <h3 class="comic-titulo"> ${infoExtra.title}</h3>
-                               
-                               
-                                </article>`
-
+                infoExtraComicYPersonajes.innerHTML += `<article data-id="${infoExtra.id}" class="comic">
+                <div class="comic-img-container">
+                <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
+                </div>
+                <h3 class="comic-titulo"> ${infoExtra.title}</h3>
+                </article>`
             })
-
             infoComic(characters)
-                //ocultarSpinner()
+            ocultarSpinner()
         })
 }
 
-
-
 //Paginas
 siguientePagina.onclick = () => {
-    if (tipo.value === 'comics') {
-        paginaActual++
-        deshabilitarBotonesPosteriores()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-        console.log(paginaActual)
-    } else {
-        paginaActual++
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-        console.log(paginaActual)
-    }
+    paginaActual++
+    deshabilitarBotonesPosteriores()
+    filtrarPorInputTipoOrden(paginaActual, input, orden)
+    console.log(paginaActual)
+
+}
+
+paginaPrevia.onclick = () => {
+    paginaActual--
+    paginaActual - 20
+    console.log(paginaActual)
+    deshabilitarBotonesPrevios()
+    filtrarPorInputTipoOrden(paginaActual, input, orden)
+
+}
+
+primeraPagina.onclick = () => {
+    paginaActual = 0
+    console.log(paginaActual)
+    deshabilitarBotonesPrevios()
+    filtrarPorInputTipoOrden(paginaActual, input, orden)
+
 }
 
 paginaFinal.onclick = () => {
@@ -445,40 +411,7 @@ paginaFinal.onclick = () => {
     }
 }
 
-paginaPrevia.onclick = () => {
-    if (tipo.value === "comics") {
-        paginaActual--
-        paginaActual - 20
-        console.log(paginaActual)
-        deshabilitarBotonesPrevios()
-
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-    } else {
-        paginaActual--
-        paginaActual - 20
-        console.log(paginaActual)
-        deshabilitarBotonesPrevios()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-
-    }
-}
-primeraPagina.onclick = () => {
-    if (tipo.value === "comics") {
-        paginaActual = 0
-        console.log(paginaActual)
-        deshabilitarBotonesPrevios()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-    } else {
-        paginaActual = 0
-        console.log(paginaActual)
-        deshabilitarBotonesPrevios()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
-
-    }
-}
-
 const deshabilitarBotonesPrevios = () => {
-
     if (paginaActual === 0) {
         primeraPagina.disabled = true
         paginaPrevia.disabled = true
@@ -488,9 +421,7 @@ const deshabilitarBotonesPrevios = () => {
     }
 }
 
-
-
-// personajes llegar al final y deshabilutar botonrs
+// Llegar al final y deshabilitar botones
 
 const deshabilitarBotonesPosteriores = () => {
     if (paginaActual >= 2426) {
@@ -500,21 +431,15 @@ const deshabilitarBotonesPosteriores = () => {
     } else {
         paginaFinal.disabled = false
         siguientePagina.disabled = false
-
     }
     if (tipo.value === 'characters' && paginaActual == 74) {
-
         paginaFinal.disabled = true
         siguientePagina.disabled = true
     } else if (tipo.value === 'characters' && paginaActual !== 74) {
-
         paginaFinal.disabled = false
         siguientePagina.disabled = false
     }
 }
-
-
-
 
 const deshabilitarTodosLosBotones = () => {
     primeraPagina.disabled = true

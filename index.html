@@ -11,21 +11,16 @@
 </head>
 
 <body>
-
     <header class="contenedor-logo">
         <h1 class="logo-ada">ADA COMICS</h1>
     </header>
     <div class="img-contenedor"><img class="img-portada" src="imagenes/banner-marvel.jpg" alt=""></div>
-
     <main>
         <section class="contenedor-buscador">
             <div class="contenedor-busqueda">
                 <h2 class="titulos-de-seccion">Búsqueda</h2>
-
-
                 <i class="fas fa-search" aria-hidden="true"></i>
                 <input class="input-barra-de-busqueda" id="filtro" type="text" placeholder="Ingresa tu busqueda">
-
             </div>
 
             <div class="contenedor-opciones">
@@ -51,32 +46,32 @@
             <h2 class="titulos-de-seccion">Resultados</h2>
             <p class="contador-resultados"><span class="cuenta-resultados"> 0 </span> RESULTADOS</p>
         </section>
+
         <div class="resultados">
         </div>
 
-        <div class="contenedor-info-extra hidden">
-            <h3 class="subtitulo-info-extra"></h3>
-            <p class="titulo-info-extra"> <span class="contador-resultados-seleccionados">0</span> RESULTADOS
+        <div class="overlay hidden">
+            <div class="lds-hourglass"></div>
+        </div>
+
+        <div class=" contenedor-info-extra hidden ">
+            <h3 class="subtitulo-info-extra "></h3>
+            <p class="titulo-info-extra "> <span class="contador-resultados-seleccionados">0</span> RESULTADOS
             </p>
             <div class="dataExtra-comic-y-personajes ">
             </div>
         </div>
 
-        <!-- spinner  -->
-        <div class="contenedor-spinner">
-            <div class="lds-hourglass"></div>
-        </div>
-
-        <section class="paginas">
-            <button class="boton-secundario" id="primera-pagina"> <i class="fas fa-angle-double-left" aria-hidden="true"></i> </button>
-            <button class="boton-secundario" id="pagina-previa"> <i class="fas fa-angle-left" aria-hidden="true"></i></button>
-            <button class="boton-secundario" id="siguiente-pagina"><i class="fas fa-angle-right" aria-hidden="true"></i></button>
-            <button class="boton-secundario" id="pagina-final"><i class="fas fa-angle-double-right" aria-hidden="true"></i></button>
+        <section class="paginas ">
+            <button class="boton-secundario " id="primera-pagina"> <i class="fas fa-angle-double-left " aria-hidden="true "></i> </button>
+            <button class="boton-secundario " id="pagina-previa"> <i class="fas fa-angle-left " aria-hidden="true "></i></button>
+            <button class="boton-secundario " id="siguiente-pagina"><i class="fas fa-angle-right " aria-hidden="true "></i></button>
+            <button class="boton-secundario " id="pagina-final"><i class="fas fa-angle-double-right " aria-hidden="true "></i></button>
         </section>
     </main>
 
     <footer> Hecho con amor</footer>
-    <script src="main.js"></script>
+    <script src="main.js "></script>
 </body>
 
 </html>
