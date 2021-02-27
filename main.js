@@ -233,7 +233,6 @@ const infoComic = (comics) => {
                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
                         <p class="subtitulos">Publicado:</p>
                         <p class="respuesta-subtitulos">${convertirFecha(datosComic).toLocaleDateString()=== "Invalid Date" ? "No disponible" : convertirFecha(datosComic).toLocaleDateString()}</p>
-                        
                         <p class="subtitulos"> Guionistas:</p>
                         <p class="respuesta-subtitulos">${buscarEscritor(datosComic)}</p>
                         <p class="subtitulos"> Descripción:</p>
@@ -250,10 +249,13 @@ const infoComic = (comics) => {
     })
 }
 
+
 const buscarEscritor = (datosComic) => {
-    return datosComic.creators.items.map(creador => {
-        return creador.role === 'writer' ? `${creador.name}` : ''
-    })
+
+    return datosComic.creators.items
+        .filter((creator) => creator.role === 'writer')
+        .map((creator) => creator.name)
+        .join(', ')
 }
 
 const descripcionComic = (datosComic) => {
