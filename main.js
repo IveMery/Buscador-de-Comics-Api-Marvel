@@ -30,7 +30,6 @@ const paginaFinal = document.getElementById('pagina-final')
 const paginaPrevia = document.getElementById('pagina-previa')
 const primeraPagina = document.getElementById('primera-pagina')
 
-
 const limpiarResultados = () => {
     resultados.innerHTML = ""
 }
@@ -233,7 +232,7 @@ const infoComic = (comics) => {
                         <div class="info-comic-datos">
                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
                         <p class="subtitulos">Publicado:</p>
-                        <p class="respuesta-subtitulos">${datosComic.dates[0].date}</p>
+                        <p class="respuesta-subtitulos">${convertirFecha(datosComic).toLocaleDateString()}</p>
                         <p class="subtitulos"> Guionistas:</p>
                         <p class="respuesta-subtitulos">${buscarEscritor(datosComic)}</p>
                         <p class="subtitulos"> Descripción:</p>
@@ -267,6 +266,13 @@ const descripcionComic = (datosComic) => {
         return `${datosComic.description}`
     }
 }
+
+const convertirFecha = (datosComic) => {
+    let fecha = datosComic.modified
+    let formatoFecha = new Date(fecha)
+    return formatoFecha
+}
+
 
 //Mostrar personajes de un comic
 const infoComicPersonajes = (comic) => {
