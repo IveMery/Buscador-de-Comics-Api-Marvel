@@ -232,7 +232,8 @@ const infoComic = (comics) => {
                         <div class="info-comic-datos">
                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
                         <p class="subtitulos">Publicado:</p>
-                        <p class="respuesta-subtitulos">${convertirFecha(datosComic).toLocaleDateString()}</p>
+                        <p class="respuesta-subtitulos">${convertirFecha(datosComic).toLocaleDateString()=== "Invalid Date" ? "No disponible" : convertirFecha(datosComic).toLocaleDateString()}</p>
+                        
                         <p class="subtitulos"> Guionistas:</p>
                         <p class="respuesta-subtitulos">${buscarEscritor(datosComic)}</p>
                         <p class="subtitulos"> Descripción:</p>
@@ -251,20 +252,12 @@ const infoComic = (comics) => {
 
 const buscarEscritor = (datosComic) => {
     return datosComic.creators.items.map(creador => {
-        if (creador.role === 'writer') {
-            return ` ${creador.name}`
-        } else {
-            return ''
-        }
+        return creador.role === 'writer' ? `${creador.name}` : ''
     })
 }
 
 const descripcionComic = (datosComic) => {
-    if (datosComic.description === null) {
-        return ''
-    } else {
-        return `${datosComic.description}`
-    }
+    return datosComic.description === null ? 'No disponible' : `${datosComic.description}`
 }
 
 const convertirFecha = (datosComic) => {
@@ -272,7 +265,6 @@ const convertirFecha = (datosComic) => {
     let formatoFecha = new Date(fecha)
     return formatoFecha
 }
-
 
 //Mostrar personajes de un comic
 const infoComicPersonajes = (comic) => {
