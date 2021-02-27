@@ -200,7 +200,7 @@ const mostrarTarjetaComics = (comics) => {
     comics.data.results.map(comic => {
         resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
         <div class="comic-img-container">
-        <img src="${comic.thumbnail.path}.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
+        <img src="${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
         </div>
         <h3 class="comic-titulo"> ${comic.title}</h3>
         </article>`
@@ -227,7 +227,7 @@ const infoComic = (comics) => {
                         resultados.innerHTML = `
                         <article class="info-comic" data-id = ${datosComic.id}>
                         <div class="info-comic-img">
-                        <img src="${datosComic.thumbnail.path}.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                        <img src="${datosComic.thumbnail.path}/portrait_uncanny.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
                         </div>
                         <div class="info-comic-datos">
                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
