@@ -364,7 +364,7 @@ main .resultados-seccion {
   margin: 15px;
 }
 
-.dataExtra-comic-y-personajes {
+.data-extra-comic-y-personajes {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -415,7 +415,7 @@ main .resultados-seccion {
   .info-comic-datos {
     margin-top: 40px;
   }
-  .dataExtra-comic-y-personajes {
+  .data-extra-comic-y-personajes {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;

@@ -10,7 +10,7 @@ const orden = document.getElementById('orden')
 const botonBuscar = document.querySelector('.boton-principal')
     //Contenedores de info
 const resultados = document.querySelector('.resultados')
-const infoExtraComicYPersonajes = document.querySelector('.dataExtra-comic-y-personajes')
+const infoExtraComicYPersonajes = document.querySelector('.data-extra-comic-y-personajes')
 const contenedorInfoExtra = document.querySelector('.contenedor-info-extra')
 const tituloDeInformacionExtra = document.querySelector('.subtitulo-info-extra')
 const infoResultados = document.querySelector('.resultados-seccion')
@@ -274,8 +274,10 @@ const infoComicPersonajes = (comic) => {
     fetch(`${urlBase}/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infoDataComic => {
+            console.log(infoDataComic)
             limpiarResultadosInfoDetalles()
             infoDataComic.data.results.map(infoExtra => {
+                console.log(infoExtra)
                 mostrarContenedorInfoExtra()
                 tituloDeInformacionExtra.innerHTML = `Personajes`
                 resutadosDeSeleccionados.innerHTML = infoDataComic.data.total
@@ -289,9 +291,26 @@ const infoComicPersonajes = (comic) => {
                 </div>
                 </article>`
             })
+            noHayResultadosPersonajes(infoDataComic)
             infoPersonaje(comic)
             ocultarSpinner()
         })
+}
+
+const noHayResultadosPersonajes = (infoDataComic) => {
+    if (infoDataComic.data.total === 0) {
+        mostrarContenedorInfoExtra()
+        tituloDeInformacionExtra.innerHTML = `Personajes`
+        infoExtraComicYPersonajes.innerHTML = `<h3 class="busqueda-sin-resultados">  No se han encontrado resultados</h3>`
+    }
+}
+
+const noHayResultadosComics = (infoPersonajesComics) => {
+    if (infoPersonajesComics.data.total === 0) {
+        mostrarContenedorInfoExtra()
+        tituloDeInformacionExtra.innerHTML = `Comics`
+        infoExtraComicYPersonajes.innerHTML = `<h3 class="busqueda-sin-resultados">  No se han encontrado resultados</h3>`
+    }
 }
 
 // Buscar personajes , hacer click en el personaje y mostrar sus comics en los que aparece
@@ -326,6 +345,7 @@ const infoPersonaje = () => {
             fetch(`${urlBase}/characters/${characters.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataPersonaje => {
+                    console.log(dataPersonaje)
                     limpiarResultados()
                     dataPersonaje.data.results.map(datosPersonajes => {
                         resultados.innerHTML = `
@@ -341,6 +361,7 @@ const infoPersonaje = () => {
                     ocultarSpinner()
                     deshabilitarTodosLosBotones()
                     mostrarInfoPersonajesEnComics(characters)
+
                 })
         }
     })
@@ -364,6 +385,7 @@ const mostrarInfoPersonajesEnComics = (characters) => {
                 <h3 class="comic-titulo"> ${infoExtra.title}</h3>
                 </article>`
             })
+            noHayResultadosComics(infoPersonajesComics)
             infoComic(characters)
             ocultarSpinner()
         })
@@ -375,7 +397,6 @@ siguientePagina.onclick = () => {
     deshabilitarBotonesPosteriores()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
     console.log(paginaActual)
-
 }
 
 paginaPrevia.onclick = () => {
@@ -384,7 +405,6 @@ paginaPrevia.onclick = () => {
     console.log(paginaActual)
     deshabilitarBotonesPrevios()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
-
 }
 
 primeraPagina.onclick = () => {
@@ -392,7 +412,6 @@ primeraPagina.onclick = () => {
     console.log(paginaActual)
     deshabilitarBotonesPrevios()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
-
 }
 
 paginaFinal.onclick = () => {
