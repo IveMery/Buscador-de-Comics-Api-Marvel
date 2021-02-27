@@ -78,7 +78,6 @@
             margin: 40px 20px 40px 20px;
             // transform: translateY(0);
             transition: 0.2s;
-            // background-color: rosybrown;
             cursor: pointer;
             &-img-container {
                 width: 240px;
@@ -107,8 +106,10 @@
         
         .info-comic {
             display: flex;
-            width: 1300px;
-            height: 500px;
+            width: 100%;
+            height: auto;
+            justify-content: center;
+            flex-wrap: wrap;
             .info-comic-img {
                 width: 350px;
                 height: 500px;
@@ -206,6 +207,22 @@
         }
         
         //responsive
+        @media(max-width:1290px) {
+            .comic-titulo {
+                font-size: 25px;
+            }
+            .info-comic-datos {
+                margin-top: 40px;
+            }
+            .dataExtra-comic-y-personajes {
+                justify-content: center;
+                align-items: center;
+            }
+            .contenedor-info-extra .subtitulo-info-extra {
+                margin-left: 40px;
+            }
+        }
+        
         @media (max-width:850px) {
             .contenedor-buscador {
                 display: flex;
@@ -213,5 +230,15 @@
             }
             .input-barra-de-busqueda {
                 margin-bottom: 20px;
+            }
+            .comic-titulo {
+                font-size: 20px;
+            }
+            .contenedor-info-extra {
+                margin: 0;
+                align-items: center;
+            }
+            main .resultados-seccion {
+                margin: 0;
             }
         }

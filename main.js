@@ -282,7 +282,7 @@ const infoComicPersonajes = (comic) => {
                 infoExtraComicYPersonajes.innerHTML += `
                 <article class="tarjeta-info-extra-contenedor" data-id="${infoExtra.id}">
                 <div class="tarjeta-info-extra-img">
-                <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
                 </div>
                 <div class="tarjeta-info-extra">
                 <h2 class="tarjeta-info-extra-titulo">${infoExtra.name}</h2>
@@ -303,7 +303,7 @@ const mostrarTarjetaPersonajes = (characters) => {
     characters.data.results.map(personajes => {
         resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
             <div class="tarjeta-info-extra-img">
-            <img src="${personajes.thumbnail.path}.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+            <img src="${personajes.thumbnail.path}/portrait_uncanny.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
             </div>
             <div class="tarjeta-info-extra">
             <h3 class="tarjeta-info-extra-titulo"> ${personajes.name}</h3>
@@ -331,7 +331,7 @@ const infoPersonaje = () => {
                         resultados.innerHTML = `
                     <article class="info-comic" data-id="${datosPersonajes.id}">
                     <div class="info-comic-img">
-                    <img src="${datosPersonajes.thumbnail.path}.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                    <img src="${datosPersonajes.thumbnail.path}/portrait_uncanny.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
                     </div>
                     <div class="info-comic-datos">
                     <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
@@ -359,7 +359,7 @@ const mostrarInfoPersonajesEnComics = (characters) => {
                 tituloDeInformacionExtra.innerHTML = `Comics`
                 infoExtraComicYPersonajes.innerHTML += `<article data-id="${infoExtra.id}" class="comic">
                 <div class="comic-img-container">
-                <img src="${infoExtra.thumbnail.path}.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
+                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
                 </div>
                 <h3 class="comic-titulo"> ${infoExtra.title}</h3>
                 </article>`
