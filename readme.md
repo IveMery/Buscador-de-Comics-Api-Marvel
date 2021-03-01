@@ -9,16 +9,16 @@ se puede ver acá -->[Diseño a seguir ](https://frontend-proyecto-comics.adaitw
 
 ## Tecnologías utilizadas
 
--HTML
--CSS
--SCSS
--JAVASCRIPT
+- HTML  
+- CSS
+- SCSS
+- JAVASCRIPT
 
 RECURSOS UTILIZADOS
 
--Google fonts
--Api de Marvel
--Loading.io
--Deployado con netlify
+- Google fonts
+- Api de Marvel
+- Loading.io
+- Deployado con netlify
 
 Puedes ver el link a mi Proyecto de cómic acá  --> [Api de Comics Marvel](https://proyecto-comics.netlify.app/)
