@@ -24,6 +24,7 @@ const overlayLoader = document.querySelector('.overlay')
     //Paginas
 const comicsPorPagina = 20;
 let paginaActual = 0;
+let total = 0;
 //let paginaActualPersonajes = 0;
 const siguientePagina = document.getElementById('siguiente-pagina')
 const paginaFinal = document.getElementById('pagina-final')
@@ -195,7 +196,8 @@ const inputVacio = () => {
 const mostrarTarjetaComics = (comics) => {
     mostrarSpinner()
     mostrarInfoResultados()
-    contadorResultados.innerHTML = comics.data.total
+    total = comics.data.total
+    contadorResultados.innerHTML = total
     limpiarResultados()
     comics.data.results.map(comic => {
         resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
@@ -317,7 +319,8 @@ const noHayResultadosComics = (infoPersonajesComics) => {
 const mostrarTarjetaPersonajes = (characters) => {
     mostrarSpinner()
     mostrarInfoResultados()
-    contadorResultados.innerHTML = characters.data.total
+    total = characters.data.total
+    contadorResultados.innerHTML = total
     limpiarResultados()
     characters.data.results.map(personajes => {
         resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
@@ -415,19 +418,17 @@ primeraPagina.onclick = () => {
 }
 
 paginaFinal.onclick = () => {
-    if (tipo.value === "comics") {
-        paginaActual++
-        paginaActual = 2426
-        console.log(paginaActual)
-        deshabilitarBotonesPosteriores()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
+
+    const resto = total % comicsPorPagina
+    if (resto > 0) {
+        paginaActual = (total - (total % comicsPorPagina)) / comicsPorPagina
     } else {
-        paginaActual++
-        paginaActual = 74
-        console.log(paginaActual)
-        deshabilitarBotonesPosteriores()
-        filtrarPorInputTipoOrden(paginaActual, input, orden)
+        paginaActual((total - (total % comicsPorPagina)) / comicsPorPagina) - comicsPorPagina
     }
+
+    filtrarPorInputTipoOrden(paginaActual, input, orden)
+    deshabilitarBotonesPosteriores()
+
 }
 
 const deshabilitarBotonesPrevios = () => {
