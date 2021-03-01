@@ -9,7 +9,8 @@ se puede ver acá -->[Diseño a seguir ](https://frontend-proyecto-comics.adaitw
 
 ## Tecnologías utilizadas
 
-- HTML                                                                                                                                                                              - CSS
+- HTML  
+- CSS
 - SCSS
 - JAVASCRIPT
 
