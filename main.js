@@ -76,7 +76,6 @@ const fetchInicial = () => {
             deshabilitarBotonesPosteriores()
             ocultarSpinner()
         })
-
 }
 
 fetchInicial()
@@ -84,6 +83,7 @@ fetchInicial()
 tipo.onclick = () => {
     opcionesAlselecionarOrdenPersonajes()
 }
+
 const opcionesAlselecionarOrdenPersonajes = () => {
     if (tipo.value === "characters") {
         orden.innerHTML = `<option value="name">A-Z</option>;
@@ -117,7 +117,6 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
                 ocultarSpinner()
             })
     } else if (tipo.value === 'characters' && orden.value && input.value) {
-        console.log('elegi personajes')
         fetch(`${urlBase}/characters?apikey=${apiKey}&orderBy=${orden.value}&nameStartsWith=${input.value}&offset=${paginaActual * comicsPorPagina}`)
             .then((res) => {
                 return res.json()
@@ -202,7 +201,7 @@ const mostrarTarjetaComics = (comics) => {
     comics.data.results.map(comic => {
         resultados.innerHTML += `<article data-id="${comic.id}" class="comic">
         <div class="comic-img-container">
-        <img src="${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}" alt="" class="comic-img-portada">
+        <img src="${comic.thumbnail.path}/portrait_uncanny.${comic.thumbnail.extension}" alt="portada de comic" class="comic-img-portada">
         </div>
         <h3 class="comic-titulo"> ${comic.title}</h3>
         </article>`
@@ -229,7 +228,7 @@ const infoComic = (comics) => {
                         resultados.innerHTML = `
                         <article class="info-comic" data-id = ${datosComic.id}>
                         <div class="info-comic-img">
-                        <img src="${datosComic.thumbnail.path}/portrait_uncanny.${datosComic.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                        <img src="${datosComic.thumbnail.path}/portrait_uncanny.${datosComic.thumbnail.extension}" alt="portada de comic" class="info-comic-img-portada">
                         </div>
                         <div class="info-comic-datos">
                         <h3 class="comic-titulo"> ${datosComic.title}</h3>
@@ -276,17 +275,15 @@ const infoComicPersonajes = (comic) => {
     fetch(`${urlBase}/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infoDataComic => {
-            console.log(infoDataComic)
             limpiarResultadosInfoDetalles()
             infoDataComic.data.results.map(infoExtra => {
-                console.log(infoExtra)
                 mostrarContenedorInfoExtra()
                 tituloDeInformacionExtra.innerHTML = `Personajes`
                 resutadosDeSeleccionados.innerHTML = infoDataComic.data.total
                 infoExtraComicYPersonajes.innerHTML += `
                 <article class="tarjeta-info-extra-contenedor" data-id="${infoExtra.id}">
                 <div class="tarjeta-info-extra-img">
-                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="imagen de personaje" class="tarjeta-info-extra-img-portada">
                 </div>
                 <div class="tarjeta-info-extra">
                 <h2 class="tarjeta-info-extra-titulo">${infoExtra.name}</h2>
@@ -325,7 +322,7 @@ const mostrarTarjetaPersonajes = (characters) => {
     characters.data.results.map(personajes => {
         resultados.innerHTML += `<article data-id="${personajes.id}" class="tarjeta-info-extra-contenedor">
             <div class="tarjeta-info-extra-img">
-            <img src="${personajes.thumbnail.path}/portrait_uncanny.${personajes.thumbnail.extension}" alt="" class="tarjeta-info-extra-img-portada">
+            <img src="${personajes.thumbnail.path}/portrait_uncanny.${personajes.thumbnail.extension}" alt="imagen de personaje" class="tarjeta-info-extra-img-portada">
             </div>
             <div class="tarjeta-info-extra">
             <h3 class="tarjeta-info-extra-titulo"> ${personajes.name}</h3>
@@ -348,13 +345,12 @@ const infoPersonaje = () => {
             fetch(`${urlBase}/characters/${characters.dataset.id}?apikey=${apiKey}`)
                 .then(res => res.json())
                 .then(dataPersonaje => {
-                    console.log(dataPersonaje)
                     limpiarResultados()
                     dataPersonaje.data.results.map(datosPersonajes => {
                         resultados.innerHTML = `
                     <article class="info-comic" data-id="${datosPersonajes.id}">
                     <div class="info-comic-img">
-                    <img src="${datosPersonajes.thumbnail.path}/portrait_uncanny.${datosPersonajes.thumbnail.extension}" alt="" class="info-comic-img-portada">
+                    <img src="${datosPersonajes.thumbnail.path}/portrait_uncanny.${datosPersonajes.thumbnail.extension}" alt="imagen de personaje" class="info-comic-img-portada">
                     </div>
                     <div class="info-comic-datos">
                     <h3 class="comic-titulo"> ${datosPersonajes.name}</h3>
@@ -383,7 +379,7 @@ const mostrarInfoPersonajesEnComics = (characters) => {
                 tituloDeInformacionExtra.innerHTML = `Comics`
                 infoExtraComicYPersonajes.innerHTML += `<article data-id="${infoExtra.id}" class="comic">
                 <div class="comic-img-container">
-                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="" class="comic-img-portada">
+                <img src="${infoExtra.thumbnail.path}/portrait_uncanny.${infoExtra.thumbnail.extension}" alt="imagen de comic" class="comic-img-portada">
                 </div>
                 <h3 class="comic-titulo"> ${infoExtra.title}</h3>
                 </article>`
@@ -399,26 +395,21 @@ siguientePagina.onclick = () => {
     paginaActual++
     deshabilitarBotonesPosteriores()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
-    console.log(paginaActual)
 }
 
 paginaPrevia.onclick = () => {
     paginaActual--
-    paginaActual - 20
-    console.log(paginaActual)
     deshabilitarBotonesPrevios()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
 }
 
 primeraPagina.onclick = () => {
     paginaActual = 0
-    console.log(paginaActual)
     deshabilitarBotonesPrevios()
     filtrarPorInputTipoOrden(paginaActual, input, orden)
 }
 
 paginaFinal.onclick = () => {
-
     const resto = total % comicsPorPagina
     if (resto > 0) {
         paginaActual = (total - (total % comicsPorPagina)) / comicsPorPagina
@@ -428,7 +419,6 @@ paginaFinal.onclick = () => {
 
     filtrarPorInputTipoOrden(paginaActual, input, orden)
     deshabilitarBotonesPosteriores()
-
 }
 
 const deshabilitarBotonesPrevios = () => {
