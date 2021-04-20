@@ -24,6 +24,7 @@
             </div>
 
             <div class="contenedor-opciones">
+                <!-- no es necesario el action aqui -->
                 <form action="formulario">
                     <label for="tipo">TIPO</label>
                     <select name="tipo" id="tipo">
@@ -50,6 +51,7 @@
             <div class="lds-hourglass"></div>
         </div>
 
+        <!-- ojo con dejar espacios en los nombres de clase, pueden romperte el css -->
         <div class=" contenedor-info-extra hidden ">
             <h3 class="subtitulo-info-extra "></h3>
             <p class="titulo-info-extra "> <span class="contador-resultados-seleccionados">0</span> RESULTADOS
@@ -59,6 +61,7 @@
         </div>
 
         <section class="paginas ">
+            <!-- agrega a los botones un aria-label asi un usuario que usa lector de pantalla sabe que son estos botones <3  -->
             <button class="boton-secundario " id="primera-pagina"> <i class="fas fa-angle-double-left "aria-hidden="true "></i> </button>
             <button class="boton-secundario " id="pagina-previa"> <i class="fas fa-angle-left "aria-hidden="true "></i></button>
             <button class="boton-secundario " id="siguiente-pagina"><i class="fas fa-angle-right "aria-hidden="true "></i></button>
