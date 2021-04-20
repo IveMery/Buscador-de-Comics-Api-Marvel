@@ -35,6 +35,21 @@ const limpiarResultados = () => {
     resultados.innerHTML = ""
 }
 
+// Tenes muuuuchas funciones que hacen lo mismo: ocultar distintos elementos
+// No es mala tu estrategia (prefiero que sobren las funciones y no que falten)
+// pero podemos hacer una reutilizable, que reciba la seccion a ocultar por
+// parametros y sirva para tooodas estas
+
+// por ejemplo:
+// const ocultarElemento = (elemento) => {
+//     elemento.classList.add('hidden')
+// }
+// Y despues la llamamos pasandole el elemento, asi:
+// ocultarElemento(overlayLoader)
+// ocultarElemento(contenedorInfoExtra)
+// etc
+// Podemos hacer otra funcion similar para agregar la clase hidden
+
 const mostrarSpinner = () => {
     overlayLoader.classList.remove('hidden')
 }
@@ -71,6 +86,7 @@ const fetchInicial = () => {
             return res.json()
         })
         .then((comics) => {
+            // que hermoso este codigo tan funcionalizado!!!
             mostrarTarjetaComics(comics)
             deshabilitarBotonesPrevios()
             deshabilitarBotonesPosteriores()
@@ -225,6 +241,8 @@ const infoComic = (comics) => {
                 .then(dataComic => {
                     limpiarResultados()
                     dataComic.data.results.map(datosComic => {
+                        // celebro que hayas agregado un alt, pero mas util seria 
+                        // decir exactamente de que es la imagen: el titulo del comic seria un buen agregado
                         resultados.innerHTML = `
                         <article class="info-comic" data-id = ${datosComic.id}>
                         <div class="info-comic-img">
@@ -252,7 +270,7 @@ const infoComic = (comics) => {
 
 
 const buscarEscritor = (datosComic) => {
-
+// que hermosa esta funcion!! excelente uso de metodos de array!!
     return datosComic.creators.items
         .filter((creator) => creator.role === 'writer')
         .map((creator) => creator.name)
@@ -434,6 +452,9 @@ const deshabilitarBotonesPrevios = () => {
 // Llegar al final y deshabilitar botones
 
 const deshabilitarBotonesPosteriores = () => {
+    // aca estas asumiendo que siempre vas a tener 2426 paginas, 
+    // pero la api puede cambiar todo el tiempo!!
+    // mismo con los personajes
     if (paginaActual >= 2426) {
         paginaFinal.disabled = true
         siguientePagina.disabled = true
