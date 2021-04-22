@@ -3,6 +3,7 @@
 Este es mi primer proyecto utilizando una API, en este caso la de marvel, desde donde recibiremos informacion.
 Se podrá buscar comics y personajes por nombre y además,  utilizar diferentes filtros para realizar búsquedas.
 Este trabajo es también mi primer proyecto en el que utilizo  un preprocesador de css,  en este caso Sass.
+Lo ideal es tener instalado LiveServer para ejecutarlo en local.
 
 La idea era seguir el diseno dado por Ada 
 se puede ver acá -->[Diseño a seguir ](https://frontend-proyecto-comics.adaitw.org/)
@@ -13,6 +14,7 @@ se puede ver acá -->[Diseño a seguir ](https://frontend-proyecto-comics.adaitw
 - CSS
 - SCSS
 - JAVASCRIPT
+
 
 RECURSOS UTILIZADOS
 
