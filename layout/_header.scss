@@ -1,6 +1,7 @@
     .contenedor-logo {
         @include componentes-secundarios;
         @extend %centrar-flex;
+       
     }
     
     .logo-ada {
