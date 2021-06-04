@@ -172,9 +172,9 @@ main #orden {
 
 .fa-search {
   position: relative;
-  top: 40px;
-  font-size: 18px;
-  left: 5px;
+  top: 5px;
+  font-size: 13px;
+  left: 15px;
 }
 
 label {
@@ -204,12 +204,11 @@ main {
 main .input-barra-de-busqueda {
   border: 0;
   border-bottom: 2px solid #151515;
-  width: 100%;
+  width: 80%;
   padding: 5px 35px;
   border-radius: 0;
-  font-size: 26px;
+  font-size: 15px;
   margin-top: 10px;
-  margin-right: 160px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
