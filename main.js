@@ -18,6 +18,8 @@ const contadorResultadosSeleccionados = document.querySelector('.contador-result
 let contadorResultados = document.querySelector('.cuenta-resultados')
 let resutadosDeSeleccionados = document.querySelector('.contador-resultados-seleccionados')
 const descripcion = document.querySelector('.descripcion')
+//button
+const btnVovler = document.querySelector('.vovler')
     //Spinner
 const spinnerLoader = document.querySelector('.lds-hourglass')
 const overlayLoader = document.querySelector('.overlay')
@@ -61,6 +63,10 @@ const mostrarInfoResultados = () => {
 
 const ocultarInfoResultados = () => {
     infoResultados.classList.add('hidden')
+}
+
+btnVovler.onclick=()=>{
+    history.go(-1)
 }
 
 const fetchInicial = () => {
