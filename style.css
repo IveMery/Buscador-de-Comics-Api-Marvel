@@ -135,7 +135,7 @@ main #orden {
 }
 
 .boton-principal, .boton-secundario {
-  height: 50px;
+  height: 40px;
   background-color: black;
   font-family: 'Roboto', sans-serif;
   color: white;
@@ -170,15 +170,19 @@ main #orden {
           align-items: flex-end;
 }
 
+.link-logo {
+  text-decoration: none;
+}
+
 .fa-search {
   position: relative;
   top: 5px;
   font-size: 13px;
-  left: 15px;
+  left: 19px;
 }
 
 label {
-  font-size: 13px;
+  font-size: 10px;
   font-weight: bold;
   letter-spacing: 1px;
   text-transform: uppercase;

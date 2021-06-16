@@ -18,7 +18,9 @@ const contadorResultadosSeleccionados = document.querySelector('.contador-result
 let contadorResultados = document.querySelector('.cuenta-resultados')
 let resutadosDeSeleccionados = document.querySelector('.contador-resultados-seleccionados')
 const descripcion = document.querySelector('.descripcion')
-//Spinner
+//button
+const btnVovler = document.querySelector('.vovler')
+  //Spinner
 const spinnerLoader = document.querySelector('.lds-hourglass')
 const overlayLoader = document.querySelector('.overlay')
 //Paginas
@@ -40,6 +42,10 @@ const mostrarElemento = (elemento) => {
 
 const ocultarElemento = (elemento) => {
     elemento.classList.add('hidden')
+}
+
+btnVovler.onclick=()=>{
+    history.go(-1)
 }
 
 const fetchInicial = () => {
@@ -85,6 +91,7 @@ form.onsubmit = (e) => {
 
 const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
     mostrarElemento(overlayLoader)
+    window.scroll(0, 0)
     if (tipo.value === 'comics' && orden.value && input.value) {
         mostrarElemento(overlayLoader)
         fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&titleStartsWith=${input.value}&offset=${paginaActual * comicsPorPagina}`)
@@ -110,6 +117,7 @@ const filtrarPorInputTipoOrden = (paginaActual, input, orden) => {
 }
 
 const inputVacio = () => {
+    window.scroll(0, 0)
     mostrarElemento(overlayLoader)
     if (tipo.value === 'comics' && orden.value === 'title') {
         fetch(`${urlBase}/comics?apikey=${apiKey}&orderBy=${orden.value}&offset=${paginaActual * comicsPorPagina}`)
@@ -194,8 +202,9 @@ const mostrarTarjetaComics = (comics) => {
 
 
 // Seleccionar comic
-const infoComic = (comics) => {
+const infoComic = () => {
     mostrarElemento(overlayLoader)
+    window.scroll(0, 0)
     const listaDecomics = document.querySelectorAll('.comic');
     listaDecomics.forEach(comic => {
         comic.onclick = () => {
@@ -251,6 +260,7 @@ const convertirFecha = (datosComic) => {
 //Mostrar personajes de un comic
 const infoComicPersonajes = (comic) => {
     mostrarElemento(overlayLoader)
+    window.scroll(0, 0)
     fetch(`${urlBase}/comics/${comic.dataset.id}/characters?apikey=${apiKey}`)
         .then(res => res.json())
         .then(infoDataComic => {

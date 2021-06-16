@@ -12,28 +12,34 @@
 
 <body>
     <header class="contenedor-logo">
-        <h1 class="logo-ada">ADA COMICS</h1>
+        <a class="link-logo" href="javascript:location.reload()">
+            <h1 class="logo-ada">ADA COMICS</h1>
+        </a>
+
     </header>
     <div class="img-contenedor"><img class="img-portada" src="imagenes/banner-marvel.jpg" alt="banner de marvel"></div>
     <main>
+        <form>
         <section class="contenedor-buscador">
             <div class="contenedor-busqueda">
                 <h2 class="titulos-de-seccion">Búsqueda</h2>
-                <i class="fas fa-search" aria-hidden="true"></i>
-                <input class="input-barra-de-busqueda" id="filtro" type="text" placeholder="Ingresa tu búsqueda">
+               
+                    <i class="fas fa-search" aria-hidden="true"></i>
+                    <input class="input-barra-de-busqueda" id="filtro" type="text" placeholder="Ingresa tu búsqueda">
             </div>
 
             <div class="contenedor-opciones">
-                <form>
-                    <label for="tipo">TIPO</label>
-                    <select name="tipo" id="tipo">
-                        <option value="comics">COMICS</option>
-                        <option value="characters">PERSONAJES</option>
-                    </select>
-                    <label for="orden">ORDEN</label>
-                    <select name="orden" id="orden">
-                    </select>
-                    <button type="submit" class="boton-principal">BUSCAR</button>
+
+                <label for="tipo">TIPO</label>
+                <select name="tipo" id="tipo">
+                    <option value="comics">COMICS</option>
+                    <option value="characters">PERSONAJES</option>
+                </select>
+                <label for="orden">ORDEN</label>
+                <select name="orden" id="orden">
+                </select>
+                <button type="submit" class="boton-principal">BUSCAR</button>
+                <button type="text" class="boton-principal vovler">VOLVER</button>
             </div>
         </section>
         </form>
@@ -59,10 +65,14 @@
         </div>
 
         <section class="paginas ">
-            <button class="boton-secundario " id="primera-pagina"> <i class="fas fa-angle-double-left "aria-hidden="true "></i> </button>
-            <button class="boton-secundario " id="pagina-previa"> <i class="fas fa-angle-left "aria-hidden="true "></i></button>
-            <button class="boton-secundario " id="siguiente-pagina"><i class="fas fa-angle-right "aria-hidden="true "></i></button>
-            <button class="boton-secundario " id="pagina-final"><i class="fas fa-angle-double-right " aria-hidden="true "></i></button>
+            <button class="boton-secundario " id="primera-pagina"> <i class="fas fa-angle-double-left "
+                    aria-hidden="true "></i> </button>
+            <button class="boton-secundario " id="pagina-previa"> <i class="fas fa-angle-left "
+                    aria-hidden="true "></i></button>
+            <button class="boton-secundario " id="siguiente-pagina"><i class="fas fa-angle-right "
+                    aria-hidden="true "></i></button>
+            <button class="boton-secundario " id="pagina-final"><i class="fas fa-angle-double-right "
+                    aria-hidden="true "></i></button>
         </section>
     </main>
 
